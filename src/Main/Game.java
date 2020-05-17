@@ -10,8 +10,10 @@ import Display.Handler;
 import Graphics.Assets;
 import Graphics.GameCamera;
 import Input.Keyboard;
+import Input.Mouse;
 import States.GameOver;
 import States.GameState;
+import States.PauseState;
 import java.awt.Color;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -26,6 +28,7 @@ public class Game implements Runnable {
 
     private Display display;
     private final Keyboard keyBoard;
+    private final Mouse mouse;
     private GameState gameState;
     private Thread thread;
     private GameCamera gameCamera;
@@ -39,18 +42,22 @@ public class Game implements Runnable {
     private final double TARGETTIME = 1000000000 / FPS;
     private double delta = 0;
     private int AVERAGEFPS = FPS;
+    private boolean paused = false;
 
     public Game(String title, int width, int height) {
         this.height = height;
         this.width = width;
         this.title = title;
         keyBoard = new Keyboard();
+        mouse = new Mouse();
 
     }
 
     private void init() throws IOException, FontFormatException, FontFormatException, LineUnavailableException, LineUnavailableException, UnsupportedAudioFileException { //Método inicializar
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyBoard);
+        display.getFrame().addMouseListener(mouse);
+        display.getFrame().addMouseMotionListener(mouse);
         Assets.init();
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
@@ -114,7 +121,8 @@ public class Game implements Runnable {
 
         keyBoard.update();
         if (Keyboard.EXIT) {
-            setGameOver();
+            State.setState(new PauseState(handler));
+
         }
     }
 
@@ -141,16 +149,11 @@ public class Game implements Runnable {
         g.dispose();
         bs.show();
 
-        if (Keyboard.EXIT) {
-            setGameOver();
-
-
-        }
     } //fin dibujado
 
-    public void setGameOver() {
+    public void setGameOver(boolean win) {
         State.setState(null);
-        GameOver gameOver = new GameOver(handler);
+        GameOver gameOver = new GameOver(handler, win);
         State.setState(gameOver);
         gameOver.update();
         gameOver.draw(g);

@@ -6,6 +6,14 @@
 package States;
 
 import Display.Launcher;
+import Graphics.Assets;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,74 +37,86 @@ public class MenuState extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jugar = new javax.swing.JButton();
-        salir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.blue);
+        setMaximumSize(new java.awt.Dimension(600, 480));
+        setMinimumSize(new java.awt.Dimension(600, 480));
+        setPreferredSize(new java.awt.Dimension(600, 480));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
+        getContentPane().setLayout(null);
 
-        jugar.setBackground(new java.awt.Color(0, 153, 255));
-        jugar.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jugar.setForeground(new java.awt.Color(255, 204, 0));
-        jugar.setText("Jugar");
-        jugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jugarActionPerformed(evt);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graphics/Tiles/jugar.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
             }
         });
-
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 370, 180, 80);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graphics/Tiles/security Data_1.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 586, 325);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graphics/Tiles/salir.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+        });
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(420, 380, 170, 70);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graphics/Tiles/back.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(35, 35, 35)
-                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, -10, 610, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        jLabel3.setIcon(new ImageIcon(Assets.jugarOver));
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         Launcher.Launcher();
         this.hide();
-    }//GEN-LAST:event_jugarActionPerformed
+    }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         this.dispose();
-    }//GEN-LAST:event_salirActionPerformed
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        jLabel3.setIcon(new ImageIcon(Assets.jugar));
+    }//GEN-LAST:event_jLabel3MouseExited
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        jLabel4.setIcon(new ImageIcon(Assets.salirOver));
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        jLabel4.setIcon(new ImageIcon(Assets.salir1));
+    }//GEN-LAST:event_jLabel4MouseExited
 
     /**
      * @param args the command line arguments
@@ -105,6 +125,17 @@ public class MenuState extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    Assets.init();
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new MenuState().setVisible(true);
             }
         });
@@ -113,8 +144,8 @@ public class MenuState extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton jugar;
-    private javax.swing.JButton salir;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
 }

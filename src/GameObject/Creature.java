@@ -21,7 +21,7 @@ public abstract class Creature extends GameObject {
     public static final int DEFAULT_HEALTH = 10;
     protected int health; //vida
     protected float speed, xMove, yMove;
-    public static final float DEFAULT_ACC = 6; //aceleración
+    public static final float DEFAULT_ACC = 4; //aceleración
     private static boolean grounded;
 
     public Creature(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
@@ -106,7 +106,7 @@ public abstract class Creature extends GameObject {
                     && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) &&
                     destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     || destructibleTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
+                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
             }
         } else if (xMove < 0) { //derecha
             int tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH;
@@ -114,7 +114,7 @@ public abstract class Creature extends GameObject {
                     && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) &&
                     destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     || destructibleTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
+                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
             }
 
         }
@@ -127,7 +127,7 @@ public abstract class Creature extends GameObject {
                     && collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) && 
                     destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
+                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
             }
         } else if (yMove > 0) { //bajar
             int ty = (int) (position.getY() + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
@@ -135,7 +135,7 @@ public abstract class Creature extends GameObject {
                     || collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) && 
                     destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
+                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
 
             }
 

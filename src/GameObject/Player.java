@@ -27,14 +27,14 @@ public class Player extends Creature {
     private final double gravity = 9.8;
     private int jump = 20;
     private boolean jumped = false;
-    private final float dash = 3f;
+    private final float dash = 5f;
 
     public Player(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
-        bounds.x = 12; //inicio de rectangulo colisión en x
-        bounds.y = 46;//inicio de rectangulo colisión en y
-        bounds.width = 53; //fin de rectangulo colisión en x
-        bounds.height = 81; //fin de rectangulo colisión en y
+        bounds.x = 15; //inicio de rectangulo colisión en x
+        bounds.y = 66;//inicio de rectangulo colisión en y
+        bounds.width = 38; //fin de rectangulo colisión en x
+        bounds.height = 61; //fin de rectangulo colisión en y
         gameObject = gameState.getGameObject();
     }
 

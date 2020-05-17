@@ -8,7 +8,6 @@ package States;
 import Display.Handler;
 import Graphics.Assets;
 import Graphics.Text;
-import Main.Game;
 import Main.State;
 import Math.Vector2D;
 import java.awt.Color;
@@ -20,24 +19,24 @@ import java.awt.Graphics;
  */
 public class GameOver extends State {
 
-    private int switcher = 1;
-    Vector2D pos;
 
-    public GameOver(Handler handler) {
+    Vector2D pos;
+    boolean win = false;
+
+    public GameOver(Handler handler, boolean win) {
+
         super(handler);
+        win = win;
+        if(win){
         pos = new Vector2D((int) (handler.getGame().getWidth() / 2) - 100, (int) (handler.getGame().getHeight() / 2));
+        }
+        else{
+            pos = new Vector2D((int) (handler.getGame().getWidth() / 2) - 150, (int) (handler.getGame().getHeight() / 2));      
+        }
     }
 
     @Override
     public void update() {
-        if (switcher == 1) {
-            pos.setY(pos.getY() + 4);
-            switcher = 2;
-        }
-        if (switcher == 2) {
-            pos.setY(pos.getY() - 4);
-            switcher = 1;
-        }
 
     }
 
@@ -45,7 +44,12 @@ public class GameOver extends State {
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
-        Text.DrawText(g, "FIN DEL JUEGO", pos, Color.GREEN, Assets.font);
+        if (win) {
+            Text.DrawText(g, "FELICIDADES,EVITÓ EL HACKEO.", pos, Color.GREEN, Assets.font);
+        } else {
+
+            Text.DrawText(g,"HAS SIDO HACKEADO..", pos, Color.RED, Assets.font);
+        }
     }
 
 }

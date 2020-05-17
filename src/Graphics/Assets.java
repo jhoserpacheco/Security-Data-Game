@@ -29,8 +29,7 @@ public class Assets {
             stand4, stand5, stand6, run1, run2, run3, runFlip1,
             runFlip2, runFlip3, wall, floor, door, limits, shootTile, keys, space,
             dashRight, dashLeft, dashRight2, dashLeft2, dashRight3, dashLeft3, c, mask, inteface,
-            portal, frag;
-
+            portal, frag, continuar, salir, retry, jugar, jugarOver, salir1, salirOver;
     public static Font font;
     public static Clip clip;
 
@@ -59,7 +58,7 @@ public class Assets {
         door = tiles.crop(160, 32, 32, 32);
         limits = limits = tiles.crop(32, 224, 32, 32);
         portal = tiles.crop(32, 256, 32, 32);
-        frag = tiles.crop(160, 96, 32, 32);
+        frag = tiles.crop(160, 192, 32, 32);
         keys = Loader.ImageLoader("Tiles/botones.png");
         space = Loader.ImageLoader("Tiles/Space.png");
         dashRight = Loader.ImageLoader("Tiles/glitchRight.png");
@@ -71,9 +70,14 @@ public class Assets {
         c = Loader.ImageLoader("Tiles/c.png");
         mask = Loader.ImageLoader("Tiles/mask.png");
         inteface = Loader.ImageLoader("Tiles/interface.png");
-
+        continuar = Loader.ImageLoader("Tiles/continue.png");
+        salir = Loader.ImageLoader("Tiles/exit.png");
+        retry = Loader.ImageLoader("Tiles/retry.png");
         font = Loader.loadFont("Tiles/font.ttf", 42);
-
+        jugar = Loader.ImageLoader("Tiles/jugar.png");
+        jugarOver = Loader.ImageLoader("Tiles/jugarOver.png");
+        salir1 = Loader.ImageLoader("Tiles/salir.png");
+        salirOver = Loader.ImageLoader("Tiles/salirOver.png");
         clip = Loader.loadSound("Tiles/soundtrack.wav");
     }
 
