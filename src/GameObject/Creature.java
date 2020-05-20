@@ -103,18 +103,28 @@ public abstract class Creature extends GameObject {
         if (xMove > 0) {//izquierda
             int tx = (int) (position.getX() + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
             if ((collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
-                    && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) &&
-                    destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
+                    && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT))
+                    && destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     || destructibleTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                if (winTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
+                        || winTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
+                    handler.getGame().setGameOver(true); //si está colisionando, gana el juego
+                } else {
+                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                }
             }
         } else if (xMove < 0) { //derecha
             int tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH;
             if ((collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
-                    && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) &&
-                    destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
+                    && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT))
+                    && destructibleTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     || destructibleTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
+                if (winTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
+                        || winTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
+                    handler.getGame().setGameOver(true); //si está colisionando, gana el juego                  
+                }else{
                 handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                }
             }
 
         }
@@ -124,66 +134,69 @@ public abstract class Creature extends GameObject {
         if (yMove < 0) { //subir
             int ty = (int) (position.getY() + yMove + bounds.y) / Tile.TILEHEIGHT;
             if ((collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
-                    && collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) && 
-                    destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
+                    && collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty))
+                    && destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                if (winTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
+                        || winTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
+                    handler.getGame().setGameOver(true); //si está colisionando, gana el juego              
+                } else {
+                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                }
             }
         } else if (yMove > 0) { //bajar
             int ty = (int) (position.getY() + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
             if ((collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
-                    || collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) && 
-                    destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
+                    || collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty))
+                    && destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                handler.getGame().setGameOver(false); //si está colisionando, fin del juego
-
+                if (winTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
+                    || winTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
+                    handler.getGame().setGameOver(true); //si está colisionando,gana el juego
+                } else {
+                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                }
             }
 
         }
     }
 //-----------
-/**
-    public void xHit() {
-        if (xMove > 0) {//izquierda 
-            int tx = (int) (position.getX() + xMove + bounds.width) / Tile.TILEWIDTH;
-            if (destructibleTile(tx, (int) (position.getY() + bounds.y)
-                    / Tile.TILEHEIGHT) && destructibleTile(tx, (int) (position.getY()
-                            + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
-                System.out.println("die left");
-            }
-        } else if (xMove < 0) { //derecha
-            int tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH;
-            if (destructibleTile(tx, (int) (position.getY() + bounds.y)
-                    / Tile.TILEHEIGHT) && destructibleTile(tx, (int) (position.getY()
-                            + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
-                System.out.println("die right");
-            }
 
-        }
-    }
-
-    public void yHit() {
-        if (yMove < 0) { //subir
-            int ty = (int) (position.getY() + yMove + bounds.y) / Tile.TILEHEIGHT;
-            if (destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty) && destructibleTile((int) (position.getX() + bounds.x + bounds.width - 12) / Tile.TILEWIDTH, ty)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
-                System.out.println("die up");
-            }
-        } else if (yMove > 0) { //bajar
-            int ty = (int) (position.getY() + yMove
-                    + bounds.y + bounds.height) / Tile.TILEHEIGHT;
-            if (destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
-                    && destructibleTile((int) (position.getX() + bounds.width) / Tile.TILEWIDTH,
-                            ty)) {
-                handler.getGame().setGameOver(); //si está colisionando, fin del juego
-                System.out.println("die down");
-            }
-
-        }
-    }
-**/
+    /**
+     * public void xHit() { if (xMove > 0) {//izquierda int tx = (int)
+     * (position.getX() + xMove + bounds.width) / Tile.TILEWIDTH; if
+     * (destructibleTile(tx, (int) (position.getY() + bounds.y) /
+     * Tile.TILEHEIGHT) && destructibleTile(tx, (int) (position.getY() +
+     * bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
+     * handler.getGame().setGameOver(); //si está colisionando, fin del juego
+     * System.out.println("die left"); } } else if (xMove < 0) { //derecha int
+     * tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH; if
+     * (destructibleTile(tx, (int) (position.getY() + bounds.y) /
+     * Tile.TILEHEIGHT) && destructibleTile(tx, (int) (position.getY() +
+     * bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
+     * handler.getGame().setGameOver(); //si está colisionando, fin del juego
+     * System.out.println("die right"); }
+     *
+     * }
+     * }
+     *
+     * public void yHit() { if (yMove < 0) { //subir
+     * int ty = (int) (position.getY() + yMove + bounds.y) / Tile.TILEHEIGHT;
+     * if (destructibleTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty) && destructibleTile((int) (position.getX() + bounds.x + bounds.width - 12) / Tile.TILEWIDTH, ty)) {
+     * handler.getGame().setGameOver(); //si está colisionando, fin del juego
+     * System.out.println("die up");
+     * }
+     * } else if (yMove > 0) { //bajar int ty = (int) (position.getY() + yMove +
+     * bounds.y + bounds.height) / Tile.TILEHEIGHT; if (destructibleTile((int)
+     * (position.getX() + bounds.x) / Tile.TILEWIDTH, ty) &&
+     * destructibleTile((int) (position.getX() + bounds.width) / Tile.TILEWIDTH,
+     * ty)) { handler.getGame().setGameOver(); //si está colisionando, fin del
+     * juego System.out.println("die down"); }
+     *
+     * }
+     * }
+     *
+     */
     public static boolean isGrounded() {
         return grounded;
     }
@@ -194,6 +207,10 @@ public abstract class Creature extends GameObject {
 
     public boolean collisionWithTile(int x, int y) {
         return handler.getWorld().getTile(x, y).isSolid();
+    }
+
+    public boolean winTile(int x, int y) {
+        return handler.getWorld().getTile(x, y).isWin();
     }
 
     public boolean destructibleTile(int x, int y) {

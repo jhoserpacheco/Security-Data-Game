@@ -26,4 +26,9 @@ public class PortalTile extends Tile{
     public boolean isDestructible(){
         return true;
     }
+    
+    @Override
+    public boolean isWin(){
+        return true;
+    }
 }

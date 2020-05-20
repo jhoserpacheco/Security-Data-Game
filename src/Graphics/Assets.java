@@ -26,10 +26,10 @@ public class Assets {
     public static BufferedImage shootLeft = null;
     public static BufferedImage shootRight = null;
     public static BufferedImage stand1, stand2, stand3, //definir tiles
-            stand4, stand5, stand6, run1, run2, run3, runFlip1,
+            stand4, stand5, stand6, run1, run2, run3, runFlip1,background,secData,
             runFlip2, runFlip3, wall, floor, door, limits, shootTile, keys, space,
             dashRight, dashLeft, dashRight2, dashLeft2, dashRight3, dashLeft3, c, mask, inteface,
-            portal, frag, continuar, salir, retry, jugar, jugarOver, salir1, salirOver;
+            portal, frag, redButton, yellowButton, greenButton, blueButton, jugar, jugarOver, salir1, salirOver;
     public static Font font;
     public static Clip clip;
 
@@ -70,14 +70,17 @@ public class Assets {
         c = Loader.ImageLoader("Tiles/c.png");
         mask = Loader.ImageLoader("Tiles/mask.png");
         inteface = Loader.ImageLoader("Tiles/interface.png");
-        continuar = Loader.ImageLoader("Tiles/continue.png");
-        salir = Loader.ImageLoader("Tiles/exit.png");
-        retry = Loader.ImageLoader("Tiles/retry.png");
+        redButton = Loader.ImageLoader("Tiles/redButton.png");
+        greenButton = Loader.ImageLoader("Tiles/greenButton.png");
+        yellowButton = Loader.ImageLoader("Tiles/yellowButton.png");
+        blueButton = Loader.ImageLoader("Tiles/blueButton.png");
         font = Loader.loadFont("Tiles/font.ttf", 42);
         jugar = Loader.ImageLoader("Tiles/jugar.png");
         jugarOver = Loader.ImageLoader("Tiles/jugarOver.png");
         salir1 = Loader.ImageLoader("Tiles/salir.png");
         salirOver = Loader.ImageLoader("Tiles/salirOver.png");
+        background = Loader.ImageLoader("Tiles/back.jpg");
+        secData = Loader.ImageLoader("Tiles/securityData.png");
         clip = Loader.loadSound("Tiles/soundtrack.wav");
     }
 

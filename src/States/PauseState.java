@@ -10,9 +10,10 @@ import Graphics.Assets;
 import Input.Action;
 import Input.Button;
 import Main.State;
-import com.sun.org.apache.bcel.internal.Constants;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,31 +22,50 @@ import java.util.ArrayList;
 public class PauseState extends State {
 
     private ArrayList<Button> buttons;
+    private MenuState menuState;
 
-    public PauseState(Handler handler) {
+    public PauseState(Handler handler) throws InterruptedException {
+
         super(handler);
+        handler.getGame().getGameState().getBackSound().stop();
         buttons = new ArrayList<>();
-        buttons.add(new Button(Assets.continuar,Assets.continuar,
-                handler.getGame().getWidth()/2,handler.getGame().getHeight()/2,
-                "",new Action(){
-                    @Override
-                    public void doAction(){
-                        State.setState(new GameState(handler));
-                    }
-                }));
-    
+        buttons.add(new Button(Assets.blueButton, Assets.redButton,
+                handler.getGame().getWidth() / 2 - 100, handler.getGame().getHeight() / 2,
+                "Continuar", 20, new Action() {
+            @Override
+            public void doAction() {
+                handler.getGame().getGameState().getBackSound().play();
+                State.setState(handler.getGame().getGameState());
+            }
+        }));
+        buttons.add(new Button(Assets.yellowButton, Assets.greenButton,
+                (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2) + 100, "Menú", 50,
+                new Action() {
+            @Override
+            public void doAction() {
+                try {
+                    menuState = new MenuState(handler);
+                    State.setState(menuState);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameOver.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+        ));
+
     }
 
     @Override
     public void update() {
-        for(Button b: buttons){
+        for (Button b : buttons) {
             b.update();
         }
     }
 
     @Override
     public void draw(Graphics g) {
-                for(Button b: buttons){
+        for (Button b : buttons) {
             b.draw(g);
         }
     }

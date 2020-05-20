@@ -25,12 +25,15 @@ public class Button {
     private Rectangle boundingBox;
     private String text;
     private Action action;
+    private int fontOffset;
 
-    public Button(BufferedImage mouseOutImg,  BufferedImage mouseInImg,int x, int y, String text,Action action) {
+    public Button(BufferedImage mouseOutImg,  BufferedImage mouseInImg,int x, int y, String text,int fontOffset,Action action) {
+        mouseIn = false;
         this.mouseOutImg = mouseOutImg;
         this.mouseInImg = mouseInImg;
         this.action = action;
         this.text = text;
+        this.fontOffset = fontOffset;
         boundingBox = new Rectangle(x, y, mouseInImg.getWidth(), mouseInImg.getHeight());
 
     }
@@ -49,11 +52,11 @@ public class Button {
 
     public void draw(Graphics g) {
         if (mouseIn) {
-            g.drawImage(mouseInImg, boundingBox.x, boundingBox.y, null);
+            g.drawImage(mouseInImg, boundingBox.x, boundingBox.y,mouseInImg.getWidth()+30,mouseInImg.getHeight()+20, null);
         } else {
-            g.drawImage(mouseOutImg, boundingBox.x, boundingBox.y, null);
+            g.drawImage(mouseOutImg, boundingBox.x, boundingBox.y,mouseInImg.getWidth()+30,mouseInImg.getHeight()+20, null);
         }
-        Text.DrawText(g, text,new Vector2D(boundingBox.getX()+boundingBox.getWidth(),
+        Text.DrawText(g, text,new Vector2D(boundingBox.getX()+fontOffset,
         boundingBox.getY()+boundingBox.getHeight()), Color.WHITE,Assets.font);
     }
     

@@ -31,10 +31,14 @@ public class GameState extends State {
 
     public GameState(Handler handler) { //Carga de los objetos del juego actual
         super(handler);
+
         world = new World(handler, new File("./generateWorld/world1.txt").getAbsolutePath());
         handler.setWorld(world);
         backSound = new Sound(Assets.clip);
+
         backSound.loop(); //música
+        backSound.changeVolume(-15f);
+
         gameObject.add(new Player(handler, new Vector2D(world.getSpawnX(), world.getSpawnY()), 66, 127, Assets.stand1, this, true));
         gameObject.add(0, new Enemy(handler, new Vector2D(2400, 200), 64, 64, Assets.mask, this, true));
         gameObject.add(0, new Enemy(handler, new Vector2D(2300, 750), 64, 64, Assets.mask, this, true));
@@ -74,6 +78,10 @@ public class GameState extends State {
 
     }
 
+    public Sound getBackSound() {
+        return backSound;
+    }
+
     public ArrayList<GameObject> getGameObject() {
         return gameObject;
     }
@@ -94,7 +102,7 @@ public class GameState extends State {
 
             Text.DrawText(g, String.valueOf(score), new Vector2D(750, 80), Color.yellow, Assets.font);
         } else {
-               Text.DrawText(g, "Completado", new Vector2D(590, 80), Color.GREEN, Assets.font);         
+            Text.DrawText(g, "Completado", new Vector2D(590, 80), Color.GREEN, Assets.font);
             //handler.getGame().setGameOver(); //temporal
             g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (896 - handler.getGameCamera().getyOffset()), 64, 64, null);
             g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (832 - handler.getGameCamera().getyOffset()), 64, 64, null);

@@ -37,7 +37,7 @@ public class Enemy extends Creature {
     public void update() {
         for (int i = 0; i < gameObject.size(); i++) {
             if (Physics.Collision(this, gameObject.get(i), gameObject)) {
-                System.out.println("hit");
+                //System.out.println("hit");
                 gameState.addScore(1);
                 gameState.getGameObject().remove(gameObject.get(i));
             }

@@ -63,4 +63,8 @@ public class Tile {
     public boolean isDestructible(){
         return false;
     }
+    
+    public boolean isWin(){
+        return false;
+    }
 }

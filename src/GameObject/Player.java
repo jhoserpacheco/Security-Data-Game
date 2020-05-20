@@ -55,31 +55,31 @@ public class Player extends Creature {
         if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) {
             position.setX(position.getX() - dash);
         }
-        /**
-         * if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
-         * gameState.getGameObject().add(0, new Shoot(handler, new
-         * Vector2D((int) (position.getX() -
-         * handler.getGameCamera().getxOffset()), (int) (position.getY() -
-         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
-         * 70, 40, 10, 0, Assets.shootLeft, gameState, false)); time = 0; } if
-         * (Keyboard.SHOOT && Keyboard.RIGHT && time > 300) {
-         * gameState.getGameObject().add(0, new Shoot(handler, new
-         * Vector2D((int) (position.getX() -
-         * handler.getGameCamera().getxOffset()), (int) ((position.getY() -
-         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3))),
-         * 70, 40, 10, 0, Assets.shootRight, gameState, true)); time = 0; }
-         *
-         * if (Keyboard.SHOOT && !Keyboard.RIGHT && !Keyboard.LEFT && time >
-         * 300) { gameState.getGameObject().add(0, new Shoot(handler, new
-         * Vector2D((int) (position.getX() -
-         * handler.getGameCamera().getxOffset()), (int) (position.getY() -
-         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
-         * 70, 40, 10, 0, Assets.shootRight, gameState, true)); time = 0; }
-         *
-         */
-        
-            
-        
+/**
+        if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
+            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
+                    - handler.getGameCamera().getxOffset()), (int) (position.getY()
+                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
+                    70, 40, 10, 0, Assets.shootLeft, gameState, false));
+            time = 0;
+        }
+        if (Keyboard.SHOOT && Keyboard.RIGHT && time > 300) {
+            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
+                    - handler.getGameCamera().getxOffset()), (int) ((position.getY()
+                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3))),
+                    70, 40, 10, 0, Assets.shootRight, gameState, true));
+            time = 0;
+        }
+
+        if (Keyboard.SHOOT && !Keyboard.RIGHT && !Keyboard.LEFT && time
+                > 300) {
+            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
+                    - handler.getGameCamera().getxOffset()), (int) (position.getY()
+                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
+                    70, 40, 10, 0, Assets.shootRight, gameState, true));
+            time = 0;
+        }
+*/
         getInput();
         move();
         handler.getGameCamera().centerOnPlayer(this);
@@ -88,7 +88,7 @@ public class Player extends Creature {
     private void getInput() { //Recibir entradas de teclado 
         xMove = 0;
         yMove = 0;
-        if (Keyboard.UP) { //flecha arriba / slto
+        if (Keyboard.UP) { //flecha arriba / salto
 
             if (jump > 0) {
                 yMove = (float) -jump;

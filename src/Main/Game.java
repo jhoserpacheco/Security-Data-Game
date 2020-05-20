@@ -13,6 +13,7 @@ import Input.Keyboard;
 import Input.Mouse;
 import States.GameOver;
 import States.GameState;
+import States.MenuState;
 import States.PauseState;
 import java.awt.Color;
 import java.awt.FontFormatException;
@@ -43,6 +44,7 @@ public class Game implements Runnable {
     private double delta = 0;
     private int AVERAGEFPS = FPS;
     private boolean paused = false;
+    private State menuState;
 
     public Game(String title, int width, int height) {
         this.height = height;
@@ -53,17 +55,23 @@ public class Game implements Runnable {
 
     }
 
-    private void init() throws IOException, FontFormatException, FontFormatException, LineUnavailableException, LineUnavailableException, UnsupportedAudioFileException { //Método inicializar
+    private void init() throws IOException, FontFormatException, FontFormatException, LineUnavailableException, LineUnavailableException, UnsupportedAudioFileException, InterruptedException { //Método inicializar
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyBoard);
-        display.getFrame().addMouseListener(mouse);
-        display.getFrame().addMouseMotionListener(mouse);
+        display.getCanvas().addMouseListener(mouse);
+        display.getCanvas().addMouseMotionListener(mouse);
         Assets.init();
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
 
         gameState = new GameState(handler);
-        State.setState(gameState); //Cambiar para cambiar entre estados
+        handler.getGame().getGameState().getBackSound().stop();
+        menuState = new MenuState(handler);
+        State.setState(menuState); //Cambiar para cambiar entre estados
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 
     //Cámara 
@@ -76,44 +84,7 @@ public class Game implements Runnable {
         return keyBoard;
     }
 
-    @Override
-    public void run() {
-
-        long now = 0;
-        long lastTime = System.nanoTime(); // ver tiempo en nanosegundos
-        int frames = 0;
-        long time = 0;
-        try {
-            init();
-        } catch (IOException | FontFormatException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        while (running) {
-            //Contador de FPS
-            now = System.nanoTime();
-            delta += (now - lastTime) / TARGETTIME;
-            lastTime = now;
-            //-----------
-            if (delta >= 1) { //limitador de FPS
-                update();
-                draw();
-                delta--;
-                frames++;
-            }
-            if (time >= 1000000000) {
-                AVERAGEFPS = frames;
-                frames = 0;
-            }
-        }
-        stop();
-    }
-
-    private void update() { //método de refresco de pantalla
+    private void update() throws InterruptedException { //método de refresco de pantalla
 
         if (State.getState() != null) {
             State.getState().update();
@@ -122,6 +93,7 @@ public class Game implements Runnable {
         keyBoard.update();
         if (Keyboard.EXIT) {
             State.setState(new PauseState(handler));
+            //System.exit(1);
 
         }
     }
@@ -150,6 +122,50 @@ public class Game implements Runnable {
         bs.show();
 
     } //fin dibujado
+
+    @Override
+    public void run() {
+
+        long now = 0;
+        long lastTime = System.nanoTime(); // ver tiempo en nanosegundos
+        int frames = 0;
+        long time = 0;
+        try {
+            init();
+        } catch (IOException | FontFormatException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        while (running) {
+            //Contador de FPS
+            now = System.nanoTime();
+            delta += (now - lastTime) / TARGETTIME;
+            lastTime = now;
+            //-----------
+            if (delta >= 1) {
+                try {
+                    //limitador de FPS
+                    update();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                draw();
+                delta--;
+                frames++;
+            }
+            if (time >= 1000000000) {
+                AVERAGEFPS = frames;
+                frames = 0;
+            }
+        }
+        stop();
+    }
 
     public void setGameOver(boolean win) {
         State.setState(null);
@@ -187,6 +203,10 @@ public class Game implements Runnable {
 
     public int getHeight() {
         return height;
+    }
+
+    public Display getDisplay() {
+        return display;
     }
 
 }
