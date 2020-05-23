@@ -61,7 +61,7 @@ public class MenuState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(Assets.background, 0, 0,null);
+        g.drawImage(Assets.background, -110,-150,null);
         g.drawImage(Assets.secData,100, 0,null);
         for (Button b : buttons) {
             b.draw(g);

@@ -63,7 +63,7 @@ public class Game implements Runnable {
         Assets.init();
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
-        handler.setLevel(1);
+        handler.setLevel(2); //nivel inicial
         gameState = new GameState(handler,handler.getLevel());
         handler.getGame().getGameState().getBackSound().stop();
         menuState = new MenuState(handler);
@@ -167,13 +167,7 @@ public class Game implements Runnable {
         stop();
     }
 
-    public void setGameOver(boolean win) {
-        State.setState(null);
-        GameOver gameOver = new GameOver(handler,win);
-        State.setState(gameOver);
-        gameOver.update();
-        gameOver.draw(g);
-    }
+
 
     public synchronized void start() { //método para iniciarlizar la ventana
         if (running) {

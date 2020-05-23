@@ -36,8 +36,8 @@ public class Animation {
         lastTime = System.currentTimeMillis();
 
         if (time >= velocity) {
-            index++;
             time = 0;
+            index++;
             if (index >= frames.length) {
                 running = false;
             }
@@ -53,8 +53,7 @@ public class Animation {
         return position;
     }
 
-    public BufferedImage GetCurrentFrame()
-    {
+    public BufferedImage GetCurrentFrame() {
         return frames[index];
     }
 }

@@ -6,11 +6,10 @@
 package States;
 
 import Display.Handler;
-import GameObject.Masks;
 import GameObject.EntityManager;
 import GameObject.GameObject;
+import Graphics.Animation;
 import java.awt.Graphics;
-import GameObject.Player;
 import Graphics.Assets;
 import Graphics.Sound;
 import Graphics.Text;
@@ -30,37 +29,57 @@ public class GameState extends State {
     private World world;
     private Worlds worlds;
 
+    private ArrayList<Animation> dieAnimation = new ArrayList<>();
     private ArrayList<GameObject> gameObject = new ArrayList<>();
-    private Sound backSound;
+    private final Sound backSound, glitchSound;
 
     public GameState(Handler handler, int level) { //Carga de los objetos del juego actual
         super(handler);
+
         worlds = new Worlds(handler, level);
         world = handler.getWorld();
         Tile.doorTile.setSolid(true);
-        backSound = new Sound(Assets.clip);
+        backSound = new Sound(Assets.backMusic);
+        glitchSound = new Sound(Assets.glitchSound);
         handler.setScore(0);
         handler.setGameObject(EntityManager.EntityManager(handler, level));
         gameObject = handler.getGameObject();
         backSound.loop(); //música
         backSound.changeVolume(-15f);
+        glitchSound.changeVolume(-8f);
 
     }
 
     @Override
     public void update() {
-        if (Keyboard.EXIT) {
+
+        if ((Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) || (Keyboard.DASH && !Keyboard.LEFT && Keyboard.RIGHT)) {
+            glitchSound.start();
+        }
+        if (Keyboard.PAUSE) {
             try {
+                glitchSound.stop();
                 State.setState(new PauseState(handler));
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameState.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
+
         world.update(); //actualizando mapa
         for (int i = 0; i < handler.getGameObject().size(); i++) {
             GameObject e = (GameObject) handler.getGameObject().get(i); //actualizando cada entidad del juego
             e.update();
+        }
+
+        for (int i = 0; i < dieAnimation.size(); i++) {
+            Animation e = dieAnimation.get(i);
+            System.out.println("dieUpdate");
+            e.update();
+            if (!e.isRunning()) {
+                System.out.println("dieRemove " + i);
+                dieAnimation.remove(i);
+            }
         }
 
     }
@@ -80,19 +99,35 @@ public class GameState extends State {
         for (int i = 0; i < handler.getGameObject().size(); i++) {
             GameObject e = (GameObject) handler.getGameObject().get(i); //dibujado de cada entidad del juego
             e.draw(g);
-        }
 
+        }
+        for (int i = 0; i < dieAnimation.size(); i++) {
+            Animation e = dieAnimation.get(i);
+            g.drawImage(e.GetCurrentFrame(), (int) (handler.getPlayer().getPosition().getX() - handler.getGameCamera().getxOffset()),
+                    (int) (handler.getPlayer().getPosition().getY() - handler.getGameCamera().getyOffset()), null);
+        }
     }
 
-    public void ChargeEntities(int currentLevel) {
+    public void playDieAnimation() {
+        System.out.println("dieAnim");
+        dieAnimation.add(new Animation(Assets.dieAnim,
+                50, new Vector2D((int) (handler.getPlayer().getPosition().getX() - handler.getGameCamera().getxOffset()),
+                        (int) (handler.getPlayer().getPosition().getY() - handler.getGameCamera().getyOffset()))));
+    }
 
+    public void setGameOver(boolean win) {
+
+        playDieAnimation();
+        glitchSound.stop();
+
+       State.setState(new GameOver(handler, win));
     }
 
     public Sound getBackSound() {
         return backSound;
     }
 
-    public ArrayList<GameObject> getGameObject() {
+    public ArrayList<GameObject> getGameObject(){
         return gameObject;
     }
 
@@ -101,6 +136,7 @@ public class GameState extends State {
     }
 
     private void drawScore(Graphics g) {
+
         if (handler.getScore() != 6) {
             Text.DrawText(g, "Puntaje", new Vector2D(600, 80), Color.CYAN, Assets.font);
         }

@@ -27,7 +27,6 @@ public class GameOver extends State {
     private Vector2D pos;
     private boolean win;
     private ArrayList<Button> buttons;
-    private MenuState menuState;
 
     public GameOver(Handler handler, boolean winer) {
 
@@ -36,8 +35,7 @@ public class GameOver extends State {
 
         handler.getGame().getGameState().getBackSound().stop();
         buttons = new ArrayList<>();
-
-        if (win && handler.getLevel()<3) {
+        if (win && handler.getLevel() < 3) {
             //botón avanzar nivel
             buttons.add(new Button(Assets.blueButton, Assets.redButton,
                     (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2), "Siguiente", 10,
@@ -45,7 +43,6 @@ public class GameOver extends State {
                 @Override
                 public void doAction() {
                     handler.setLevel(handler.getLevel() + 1);
-
                     State.setState(new GameState(handler, handler.getLevel()));
                     handler.getGame().setGameState(new GameState(handler, handler.getLevel()));
                 }
@@ -54,7 +51,7 @@ public class GameOver extends State {
         }
         if (!win) {
             //botón reintentar
-            
+
             buttons.add(new Button(Assets.blueButton, Assets.redButton,
                     (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2), "Reintentar", 10,
                     new Action() {

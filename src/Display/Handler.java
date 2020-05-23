@@ -6,6 +6,7 @@
 package Display;
 
 import GameObject.GameObject;
+import GameObject.Player;
 import Graphics.GameCamera;
 import Graphics.Tiles.World;
 import Input.Keyboard;
@@ -24,6 +25,7 @@ public class Handler {
     private ArrayList<GameObject> gameObject;
     private int score;
     private boolean mute = false;
+    private Player player;
     
     public Handler(Game game){
         this.game= game;
@@ -72,6 +74,14 @@ public class Handler {
 
     public int getLevel() {
         return level;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public void setLevel(int level) {

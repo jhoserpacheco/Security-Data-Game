@@ -22,11 +22,18 @@ public class Sound {
     }
     
     public void play(){
+        clip.setFramePosition(0);
         clip.start();
     }
     
     public void stop(){
+        clip.setFramePosition(0);
         clip.stop();
+
+    }
+    
+    public void start(){
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
     
     public void loop(){
@@ -36,6 +43,10 @@ public class Sound {
     
     public void changeVolume(float value){
         volume.setValue(value);
+    }
+    
+    public int getFramePosition(){
+        return clip.getFramePosition();
     }
     
 }

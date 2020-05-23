@@ -12,7 +12,7 @@ public class Keyboard implements KeyListener {
 
     private final boolean[] keys;
 
-    public static boolean UP, DOWN, LEFT, RIGHT, SHOOT,DASH,EXIT;
+    public static boolean UP, DOWN, LEFT, RIGHT, SHOOT,DASH,PAUSE;
 
     public Keyboard() {
         keys = new boolean[256];
@@ -21,7 +21,7 @@ public class Keyboard implements KeyListener {
         LEFT = false;
         RIGHT = false;
         DASH = false;
-        EXIT = false;
+        PAUSE = false;
     }
 
     public void update() {
@@ -31,7 +31,7 @@ public class Keyboard implements KeyListener {
         RIGHT = keys[KeyEvent.VK_RIGHT];
         SHOOT = keys[KeyEvent.VK_SPACE]; //disparar con X
         DASH = keys[KeyEvent.VK_C];
-        EXIT = keys[KeyEvent.VK_ESCAPE];
+        PAUSE = keys[KeyEvent.VK_ESCAPE];
     }
 
     @Override

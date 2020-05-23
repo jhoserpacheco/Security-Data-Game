@@ -6,6 +6,8 @@
 package GameObject;
 
 import Display.Handler;
+import Graphics.Assets;
+import Graphics.Sound;
 import Math.Physics;
 import Math.Vector2D;
 import States.GameState;
@@ -21,7 +23,8 @@ import java.util.ArrayList;
  */
 public class Masks extends GameObject {
 
-    ArrayList<GameObject> gameObject = new ArrayList<>();
+    private ArrayList<GameObject> gameObject = new ArrayList<>();
+    private Sound maskSound;
 
     public Masks(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
@@ -30,7 +33,7 @@ public class Masks extends GameObject {
         bounds.y = 0;//inicio de rectangulo colisión en y
         bounds.width = texture.getWidth(); //fin de rectangulo colisión en x
         bounds.height = texture.getHeight(); //fin de rectangulo colisión en y  
-
+        maskSound = new Sound(Assets.maskSound);
     }
 
     @Override
@@ -38,6 +41,8 @@ public class Masks extends GameObject {
         for (int i = 0; i < handler.getGameObject().size(); i++) {
             if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) {
                 //System.out.println("hit");
+                maskSound.play();
+                
                 handler.setScore(handler.getScore()+1);
                 handler.getGameObject().remove((GameObject) handler.getGameObject().get(i));
             }

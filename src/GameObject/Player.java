@@ -26,7 +26,6 @@ public class Player extends Creature {
     ArrayList<GameObject> gameObject;
     private final double gravity = 9.8;
     private int jump = 20;
-    private boolean jumped = false;
     private final float dash = 5f;
 
     public Player(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
@@ -46,15 +45,19 @@ public class Player extends Creature {
 
     @Override
     public void update() {
+
         time += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();
 
         if (Keyboard.DASH && Keyboard.RIGHT && !Keyboard.LEFT) {
-            position.setX(position.getX() + dash);
+
+            position.setX(position.getX() + dash);         
         }
 
         if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) {
             position.setX(position.getX() - dash);
+        }
+        if (!Keyboard.DASH && !Keyboard.LEFT && !Keyboard.RIGHT) {
         }
         /**
          * if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
@@ -80,6 +83,7 @@ public class Player extends Creature {
         getInput();
         move();
         handler.getGameCamera().centerOnPlayer(this);
+
     }
 
     private void getInput() { //Recibir entradas de teclado 
