@@ -34,7 +34,7 @@ public class Button {
         this.action = action;
         this.text = text;
         this.fontOffset = fontOffset;
-        boundingBox = new Rectangle(x, y, mouseInImg.getWidth(), mouseInImg.getHeight());
+        boundingBox = new Rectangle(x, y, mouseInImg.getWidth()+30, mouseInImg.getHeight()+30);
 
     }
 
@@ -57,7 +57,7 @@ public class Button {
             g.drawImage(mouseOutImg, boundingBox.x, boundingBox.y,mouseInImg.getWidth()+30,mouseInImg.getHeight()+20, null);
         }
         Text.DrawText(g, text,new Vector2D(boundingBox.getX()+fontOffset,
-        boundingBox.getY()+boundingBox.getHeight()), Color.WHITE,Assets.font);
+        boundingBox.getY()+40), Color.WHITE,Assets.font);
     }
     
 

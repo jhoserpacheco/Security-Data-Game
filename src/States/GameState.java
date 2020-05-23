@@ -6,7 +6,8 @@
 package States;
 
 import Display.Handler;
-import GameObject.Enemy;
+import GameObject.Masks;
+import GameObject.EntityManager;
 import GameObject.GameObject;
 import java.awt.Graphics;
 import GameObject.Player;
@@ -15,47 +16,50 @@ import Graphics.Sound;
 import Graphics.Text;
 import Graphics.Tiles.Tile;
 import Graphics.Tiles.World;
+import Input.Keyboard;
 import Main.State;
 import Math.Vector2D;
 import java.awt.Color;
-import java.io.File;
+import Main.Worlds;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameState extends State {
 
     private World world;
+    private Worlds worlds;
 
-    private int score = 0;
     private ArrayList<GameObject> gameObject = new ArrayList<>();
     private Sound backSound;
 
-    public GameState(Handler handler) { //Carga de los objetos del juego actual
+    public GameState(Handler handler, int level) { //Carga de los objetos del juego actual
         super(handler);
-
-        world = new World(handler, new File("./generateWorld/world1.txt").getAbsolutePath());
-        handler.setWorld(world);
+        worlds = new Worlds(handler, level);
+        world = handler.getWorld();
+        Tile.doorTile.setSolid(true);
         backSound = new Sound(Assets.clip);
-
+        handler.setScore(0);
+        handler.setGameObject(EntityManager.EntityManager(handler, level));
+        gameObject = handler.getGameObject();
         backSound.loop(); //música
         backSound.changeVolume(-15f);
-
-        gameObject.add(new Player(handler, new Vector2D(world.getSpawnX(), world.getSpawnY()), 66, 127, Assets.stand1, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(2400, 200), 64, 64, Assets.mask, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(2300, 750), 64, 64, Assets.mask, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(400, 800), 64, 64, Assets.mask, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(200, 1200), 64, 64, Assets.mask, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(2300, 1200), 64, 64, Assets.mask, this, true));
-        gameObject.add(0, new Enemy(handler, new Vector2D(200, 450), 64, 64, Assets.mask, this, true));
-        handler.getGame().getGameCamera().move(0, 0);
 
     }
 
     @Override
     public void update() {
+        if (Keyboard.EXIT) {
+            try {
+                State.setState(new PauseState(handler));
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameState.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+        }
         world.update(); //actualizando mapa
-        for (int i = 0; i < gameObject.size(); i++) {
-            GameObject e = gameObject.get(i); //actualizando cada entidad del juego
+        for (int i = 0; i < handler.getGameObject().size(); i++) {
+            GameObject e = (GameObject) handler.getGameObject().get(i); //actualizando cada entidad del juego
             e.update();
         }
 
@@ -67,14 +71,20 @@ public class GameState extends State {
         world.draw(g); //dibujado del mapa
         g.drawImage(Assets.inteface, (int) (580), (int) (40), 200, 50, null);
         drawScore(g);
-        g.drawImage(Assets.keys, (int) (200 - handler.getGameCamera().getxOffset()), (int) (200 - handler.getGameCamera().getyOffset()), null);
-        g.drawImage(Assets.c, (int) (600 - handler.getGameCamera().getxOffset()), (int) (100 - handler.getGameCamera().getyOffset()), null);
-        //g.drawImage(Assets.space, (int) (1900 - handler.getGameCamera().getxOffset()), (int) (170 - handler.getGameCamera().getyOffset()), null);
+        if (handler.getLevel() == 1) {
+            g.drawImage(Assets.keys, (int) (200 - handler.getGameCamera().getxOffset()), (int) (200 - handler.getGameCamera().getyOffset()), null);
+            g.drawImage(Assets.c, (int) (600 - handler.getGameCamera().getxOffset()), (int) (100 - handler.getGameCamera().getyOffset()), null);
+        }
 
-        for (int i = 0; i < gameObject.size(); i++) {
-            GameObject e = gameObject.get(i); //dibujado de cada entidad del juego
+        //g.drawImage(Assets.space, (int) (1900 - handler.getGameCamera().getxOffset()), (int) (170 - handler.getGameCamera().getyOffset()), null);
+        for (int i = 0; i < handler.getGameObject().size(); i++) {
+            GameObject e = (GameObject) handler.getGameObject().get(i); //dibujado de cada entidad del juego
             e.draw(g);
         }
+
+    }
+
+    public void ChargeEntities(int currentLevel) {
 
     }
 
@@ -90,22 +100,22 @@ public class GameState extends State {
         this.gameObject = GameObject;
     }
 
-    public void addScore(int value) {
-        score += value;
-    }
-
     private void drawScore(Graphics g) {
-        if (score != 6) {
+        if (handler.getScore() != 6) {
             Text.DrawText(g, "Puntaje", new Vector2D(600, 80), Color.CYAN, Assets.font);
         }
-        if (score < 6) {
+        if (handler.getScore() < 6) {
 
-            Text.DrawText(g, String.valueOf(score), new Vector2D(750, 80), Color.yellow, Assets.font);
+            Text.DrawText(g, String.valueOf(handler.getScore()), new Vector2D(750, 80), Color.yellow, Assets.font);
         } else {
             Text.DrawText(g, "Completado", new Vector2D(590, 80), Color.GREEN, Assets.font);
-            //handler.getGame().setGameOver(); //temporal
-            g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (896 - handler.getGameCamera().getyOffset()), 64, 64, null);
-            g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (832 - handler.getGameCamera().getyOffset()), 64, 64, null);
+            if (handler.getLevel() <= 2) {
+                g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (896 - handler.getGameCamera().getyOffset()), 64, 64, null);
+                g.drawImage(Assets.floor, (int) (320 - handler.getGameCamera().getxOffset()), (int) (832 - handler.getGameCamera().getyOffset()), 64, 64, null);
+            } else if (handler.getLevel() == 3) {
+                g.drawImage(Assets.floor, (int) (5568 - handler.getGameCamera().getxOffset()), (int) (512 - handler.getGameCamera().getyOffset()), 64, 64, null);
+                g.drawImage(Assets.floor, (int) (5568 - handler.getGameCamera().getxOffset()), (int) (448 - handler.getGameCamera().getyOffset()), 64, 64, null);
+            }
             Tile.doorTile.setSolid(false);
 
         }

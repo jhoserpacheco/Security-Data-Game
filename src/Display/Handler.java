@@ -5,10 +5,12 @@
  */
 package Display;
 
+import GameObject.GameObject;
 import Graphics.GameCamera;
 import Graphics.Tiles.World;
 import Input.Keyboard;
 import Main.Game;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,14 +19,15 @@ import Main.Game;
 public class Handler {
     private World world;
     private Game game;
-    private Handler handler;   
+    private Handler handler;  
+    private int level;
+    private ArrayList<GameObject> gameObject;
+    private int score;
+    private boolean mute = false;
     
     public Handler(Game game){
         this.game= game;
-    }
-    
-    public void print(){
-        System.out.println(handler.getGame().width);
+        
     }
     
     public GameCamera getGameCamera(){
@@ -45,9 +48,18 @@ public class Handler {
     public World getWorld() {
         return world;
     }
+    
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public boolean isMute() {
+        return mute;
+    }
+
+    public void setMute(boolean mute) {
+        this.mute = mute;
     }
 
     public Game getGame() {
@@ -57,5 +69,33 @@ public class Handler {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public ArrayList getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(ArrayList gameObject) {
+        this.gameObject = gameObject;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+    
+    
+    
+    
     
 }

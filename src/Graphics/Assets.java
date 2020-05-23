@@ -26,7 +26,7 @@ public class Assets {
     public static BufferedImage shootLeft = null;
     public static BufferedImage shootRight = null;
     public static BufferedImage stand1, stand2, stand3, //definir tiles
-            stand4, stand5, stand6, run1, run2, run3, runFlip1,background,secData,
+            stand4, stand5, stand6, run1, run2, run3, runFlip1,background,secData,soundOn,soundOff,
             runFlip2, runFlip3, wall, floor, door, limits, shootTile, keys, space,
             dashRight, dashLeft, dashRight2, dashLeft2, dashRight3, dashLeft3, c, mask, inteface,
             portal, frag, redButton, yellowButton, greenButton, blueButton, jugar, jugarOver, salir1, salirOver;
@@ -74,13 +74,15 @@ public class Assets {
         greenButton = Loader.ImageLoader("Tiles/greenButton.png");
         yellowButton = Loader.ImageLoader("Tiles/yellowButton.png");
         blueButton = Loader.ImageLoader("Tiles/blueButton.png");
-        font = Loader.loadFont("Tiles/font.ttf", 42);
         jugar = Loader.ImageLoader("Tiles/jugar.png");
         jugarOver = Loader.ImageLoader("Tiles/jugarOver.png");
         salir1 = Loader.ImageLoader("Tiles/salir.png");
         salirOver = Loader.ImageLoader("Tiles/salirOver.png");
         background = Loader.ImageLoader("Tiles/back.jpg");
         secData = Loader.ImageLoader("Tiles/securityData.png");
+        soundOn = Loader.ImageLoader("Tiles/soundOn.png");
+        soundOff = Loader.ImageLoader("Tiles/soundOff.png");
+          font = Loader.loadFont("Tiles/font.ttf", 42);      
         clip = Loader.loadSound("Tiles/soundtrack.wav");
     }
 

@@ -23,7 +23,7 @@ public class Player extends Creature {
 
     private double time = 0;
     private double lastTime = System.currentTimeMillis();
-    ArrayList<GameObject> gameObject = new ArrayList<GameObject>();
+    ArrayList<GameObject> gameObject;
     private final double gravity = 9.8;
     private int jump = 20;
     private boolean jumped = false;
@@ -31,11 +31,12 @@ public class Player extends Creature {
 
     public Player(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
-        bounds.x = 15; //inicio de rectangulo colisión en x
+        gameObject = handler.getGameObject();
+        bounds.x = 20; //inicio de rectangulo colisión en x
         bounds.y = 66;//inicio de rectangulo colisión en y
-        bounds.width = 38; //fin de rectangulo colisión en x
+        bounds.width = 25; //fin de rectangulo colisión en x
         bounds.height = 61; //fin de rectangulo colisión en y
-        gameObject = gameState.getGameObject();
+
     }
 
     @Override
@@ -55,31 +56,27 @@ public class Player extends Creature {
         if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) {
             position.setX(position.getX() - dash);
         }
-/**
-        if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
-            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
-                    - handler.getGameCamera().getxOffset()), (int) (position.getY()
-                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
-                    70, 40, 10, 0, Assets.shootLeft, gameState, false));
-            time = 0;
-        }
-        if (Keyboard.SHOOT && Keyboard.RIGHT && time > 300) {
-            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
-                    - handler.getGameCamera().getxOffset()), (int) ((position.getY()
-                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3))),
-                    70, 40, 10, 0, Assets.shootRight, gameState, true));
-            time = 0;
-        }
-
-        if (Keyboard.SHOOT && !Keyboard.RIGHT && !Keyboard.LEFT && time
-                > 300) {
-            gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
-                    - handler.getGameCamera().getxOffset()), (int) (position.getY()
-                    - handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
-                    70, 40, 10, 0, Assets.shootRight, gameState, true));
-            time = 0;
-        }
-*/
+        /**
+         * if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
+         * gameState.getGameObject().add(0, new Shoot(handler, new
+         * Vector2D((int) (position.getX() -
+         * handler.getGameCamera().getxOffset()), (int) (position.getY() -
+         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
+         * 70, 40, 10, 0, Assets.shootLeft, gameState, false)); time = 0; } if
+         * (Keyboard.SHOOT && Keyboard.RIGHT && time > 300) {
+         * gameState.getGameObject().add(0, new Shoot(handler, new
+         * Vector2D((int) (position.getX() -
+         * handler.getGameCamera().getxOffset()), (int) ((position.getY() -
+         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3))),
+         * 70, 40, 10, 0, Assets.shootRight, gameState, true)); time = 0; }
+         *
+         * if (Keyboard.SHOOT && !Keyboard.RIGHT && !Keyboard.LEFT && time >
+         * 300) { gameState.getGameObject().add(0, new Shoot(handler, new
+         * Vector2D((int) (position.getX() -
+         * handler.getGameCamera().getxOffset()), (int) (position.getY() -
+         * handler.getGameCamera().getyOffset()) + (texture.getHeight() / 3)),
+         * 70, 40, 10, 0, Assets.shootRight, gameState, true)); time = 0; }
+         */
         getInput();
         move();
         handler.getGameCamera().centerOnPlayer(this);

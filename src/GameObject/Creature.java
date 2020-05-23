@@ -7,7 +7,9 @@ package GameObject;
 
 import Display.Handler;
 import Graphics.Tiles.Tile;
+import Main.State;
 import Math.Vector2D;
+import States.GameOver;
 import States.GameState;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -21,7 +23,7 @@ public abstract class Creature extends GameObject {
     public static final int DEFAULT_HEALTH = 10;
     protected int health; //vida
     protected float speed, xMove, yMove;
-    public static final float DEFAULT_ACC = 4; //aceleración
+    public static final float DEFAULT_ACC = 5; //aceleración
     private static boolean grounded;
 
     public Creature(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
@@ -108,9 +110,9 @@ public abstract class Creature extends GameObject {
                     || destructibleTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
                 if (winTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                         || winTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                    handler.getGame().setGameOver(true); //si está colisionando, gana el juego
+                    State.setState(new GameOver(handler,true)); //si está colisionando, gana el juego
                 } else {
-                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                    State.setState(new GameOver(handler,false)); //si está colisionando, fin del juego
                 }
             }
         } else if (xMove < 0) { //derecha
@@ -139,9 +141,9 @@ public abstract class Creature extends GameObject {
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
                 if (winTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                         || winTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                    handler.getGame().setGameOver(true); //si está colisionando, gana el juego              
+                   State.setState(new GameOver(handler,true)); //si está colisionando, gana el juego              
                 } else {
-                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                    State.setState(new GameOver(handler,false)); //si está colisionando, fin del juego
                 }
             }
         } else if (yMove > 0) { //bajar
@@ -152,9 +154,9 @@ public abstract class Creature extends GameObject {
                     || destructibleTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
                 if (winTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || winTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                    handler.getGame().setGameOver(true); //si está colisionando,gana el juego
+                    State.setState(new GameOver(handler,true)); //si está colisionando,gana el juego
                 } else {
-                    handler.getGame().setGameOver(false); //si está colisionando, fin del juego
+                    State.setState(new GameOver(handler,false)); //si está colisionando, fin del juego
                 }
             }
 

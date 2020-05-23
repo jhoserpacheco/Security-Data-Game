@@ -63,8 +63,8 @@ public class Game implements Runnable {
         Assets.init();
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
-
-        gameState = new GameState(handler);
+        handler.setLevel(1);
+        gameState = new GameState(handler,handler.getLevel());
         handler.getGame().getGameState().getBackSound().stop();
         menuState = new MenuState(handler);
         State.setState(menuState); //Cambiar para cambiar entre estados
@@ -72,6 +72,10 @@ public class Game implements Runnable {
 
     public GameState getGameState() {
         return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     //Cámara 
@@ -91,11 +95,7 @@ public class Game implements Runnable {
         }
 
         keyBoard.update();
-        if (Keyboard.EXIT) {
-            State.setState(new PauseState(handler));
-            //System.exit(1);
 
-        }
     }
 
     private void draw() { //método de dibujado
@@ -169,7 +169,7 @@ public class Game implements Runnable {
 
     public void setGameOver(boolean win) {
         State.setState(null);
-        GameOver gameOver = new GameOver(handler, win);
+        GameOver gameOver = new GameOver(handler,win);
         State.setState(gameOver);
         gameOver.update();
         gameOver.draw(g);

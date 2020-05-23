@@ -33,7 +33,7 @@ public class MenuState extends State {
                 "", 20, new Action() {
             @Override
             public void doAction() {
-                gameState = new GameState(handler);
+                gameState = new GameState(handler,handler.getLevel());
                 
                 State.setState(gameState);
             }

@@ -19,27 +19,27 @@ import java.util.ArrayList;
  *
  * @author JUAN
  */
-public class Enemy extends Creature {
+public class Masks extends GameObject {
 
     ArrayList<GameObject> gameObject = new ArrayList<>();
 
-    public Enemy(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
+    public Masks(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
-        gameObject = gameState.getGameObject();
+        gameObject = handler.getGameObject();
         bounds.x = 0; //inicio de rectangulo colisión en x
         bounds.y = 0;//inicio de rectangulo colisión en y
         bounds.width = texture.getWidth(); //fin de rectangulo colisión en x
         bounds.height = texture.getHeight(); //fin de rectangulo colisión en y  
-        gameObject = gameState.getGameObject();
+
     }
 
     @Override
     public void update() {
-        for (int i = 0; i < gameObject.size(); i++) {
-            if (Physics.Collision(this, gameObject.get(i), gameObject)) {
+        for (int i = 0; i < handler.getGameObject().size(); i++) {
+            if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) {
                 //System.out.println("hit");
-                gameState.addScore(1);
-                gameState.getGameObject().remove(gameObject.get(i));
+                handler.setScore(handler.getScore()+1);
+                handler.getGameObject().remove((GameObject) handler.getGameObject().get(i));
             }
         }
 
