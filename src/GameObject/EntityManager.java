@@ -72,7 +72,20 @@ public class EntityManager {
             gameObject.add(0, new Masks(handler, new Vector2D(128, 1472), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
             handler.getGame().getGameCamera().move(0, 0);
         }
-        
+        if (handler.getLevel() == 5) {
+            gameObject.clear();
+            handler.setPlayer(new Player(handler, new Vector2D(handler.getWorld().getSpawnX(), handler.getWorld().getSpawnY()), 66, 127, Assets.stand1, handler.getGame().getGameState(), true));
+            gameObject.add(handler.getPlayer());
+
+            gameObject.add(0, new Masks(handler, new Vector2D(1600, 1728), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(2432, 64), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(1920, 64), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(1216, 960), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(512, 64), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(192, 512), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            handler.getGame().getGameCamera().move(0, 0);
+        }
+                
         return gameObject;
     }
 }
