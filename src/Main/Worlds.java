@@ -32,6 +32,9 @@ public class Worlds {
             if (level == 4) {
                 handler.setWorld(new World(handler, new File("./generateWorld/world4.txt").getAbsolutePath()));
             }
+            if (level == 5) {
+                handler.setWorld(new World(handler, new File("./generateWorld/world5.txt").getAbsolutePath()));
+            }            
 
         } catch (NullPointerException e) {
 
