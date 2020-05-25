@@ -19,18 +19,22 @@ public class Worlds {
 
     public Worlds(Handler handler,int level){
     
-        try{
-        if(level==1){
-         handler.setWorld(new World(handler, new File("./generateWorld/world1.txt").getAbsolutePath()));           
-        }
-        if(level==2){
-         handler.setWorld(new World(handler, new File("./generateWorld/world2.txt").getAbsolutePath()));           
-        }
-        if(level==3){
-         handler.setWorld(new World(handler, new File("./generateWorld/world3.txt").getAbsolutePath()));           
-        }
-        }catch(NullPointerException e){
-            
+        try {
+            if (level == 1) {
+                handler.setWorld(new World(handler, new File("./generateWorld/world1.txt").getAbsolutePath()));
+            }
+            if (level == 2) {
+                handler.setWorld(new World(handler, new File("./generateWorld/world2.txt").getAbsolutePath()));
+            }
+            if (level == 3) {
+                handler.setWorld(new World(handler, new File("./generateWorld/world3.txt").getAbsolutePath()));
+            }
+            if (level == 4) {
+                handler.setWorld(new World(handler, new File("./generateWorld/world4.txt").getAbsolutePath()));
+            }
+
+        } catch (NullPointerException e) {
+
         }
         
     }
