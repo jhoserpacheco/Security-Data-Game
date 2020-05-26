@@ -97,6 +97,18 @@ public class EntityManager {
             gameObject.add(0, new Masks(handler, new Vector2D(1728, 128), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
             gameObject.add(0, new Masks(handler, new Vector2D(1728, 1728), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
         }
+        if (handler.getLevel() == 7) {
+            gameObject.clear();
+            handler.setPlayer(new Player(handler, new Vector2D(handler.getWorld().getSpawnX(), handler.getWorld().getSpawnY()), 66, 127, Assets.stand1, handler.getGame().getGameState(), true));
+            gameObject.add(handler.getPlayer());
+
+            gameObject.add(0, new Masks(handler, new Vector2D(2432, 64), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(1984, 128), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(1152, 192), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(768, 128), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(384, 832), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+            gameObject.add(0, new Masks(handler, new Vector2D(384, 1472), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
+        }
                          
         return gameObject;
     }
