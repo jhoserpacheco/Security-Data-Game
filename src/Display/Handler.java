@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  *
  * @author JUAN
+ * Clase encargada de guardar los parámetros globales del juego
  */
 public class Handler {
     private World world;

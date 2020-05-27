@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author JUAN
+ * Clase encargada de pausar el juego
  */
 public class PauseState extends State {
 
@@ -34,8 +35,8 @@ public class PauseState extends State {
         pos = new Vector2D((int) (handler.getGame().getWidth() / 2) - 50, (int) (handler.getGame().getHeight() / 2) - 50);
         buttons = new ArrayList<>();
         //botón reintentar
-        buttons.add(new Button(Assets.blueButton, Assets.redButton,
-                (handler.getGame().getWidth() / 2) - 300, (handler.getGame().getHeight() / 2), "Reintentar", 10,
+        buttons.add(new Button(Assets.greenButton, Assets.redButton,
+                (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2)+100, "Reintentar", 10,
                 new Action() {
             @Override
             public void doAction() {
@@ -51,12 +52,13 @@ public class PauseState extends State {
             public void doAction() {
 
                 State.setState(handler.getGame().getGameState());
+                     
             }
         }));
 
         //botón menú
         buttons.add(new Button(Assets.yellowButton, Assets.redButton,
-                (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2) + 100, "Menú", 50,
+                (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2) + 200, "Menú", 50,
                 new Action() {
             @Override
             public void doAction() {

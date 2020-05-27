@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author JUAN
+ * Clase encargada de leer las entradas por mouse
  */
 public class Mouse extends MouseAdapter {
 

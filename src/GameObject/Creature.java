@@ -15,25 +15,25 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author JUAN
+ * Subclase de gameObject encargada de los movimientos del jugador y demás objetos móviles
  */
 public abstract class Creature extends GameObject {
 
     public static final int DEFAULT_HEALTH = 10;
-    protected int health; //vida
-    protected float speed, xMove, yMove;
+    protected float speed, xMove, yMove; //parámetros de velocidad del jugador
     public static final float DEFAULT_ACC = 5; //aceleración
-    private static boolean grounded;
+    private static boolean grounded; //tocando el suelo
 
     public Creature(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
-        health = DEFAULT_HEALTH;
         speed = DEFAULT_ACC;
         xMove = 0;
         yMove = 0;
         grounded = false;
 
     }
-
+    
+ //método para ejecutar movimientos y detección de colisiones
     public void move() {
         yHit();
         xHit();
@@ -100,7 +100,7 @@ public abstract class Creature extends GameObject {
 //-----------
 
     public void xHit() {
-        if (xMove > 0) {//izquierda
+        if (xMove > 0) {//izquierda Tile muerte
             int tx = (int) (position.getX() + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
             if ((collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT))
@@ -113,7 +113,7 @@ public abstract class Creature extends GameObject {
                     handler.getGame().getGameState().setGameOver(false); //si está colisionando, fin del juego
                 }
             }
-        } else if (xMove < 0) { //derecha
+        } else if (xMove < 0) { //derecha Tile muerte
             int tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH;
             if ((collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     && collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT))
@@ -131,7 +131,7 @@ public abstract class Creature extends GameObject {
     }
 
     public void yHit() {
-        if (yMove < 0) { //subir
+        if (yMove < 0) { //subir Tile muerte
             int ty = (int) (position.getY() + yMove + bounds.y) / Tile.TILEHEIGHT;
             if ((collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     && collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty))
@@ -144,7 +144,7 @@ public abstract class Creature extends GameObject {
                     handler.getGame().getGameState().setGameOver(false); //si está colisionando, fin del juego
                 }
             }
-        } else if (yMove > 0) { //bajar
+        } else if (yMove > 0) { //bajar Tile muerte
             int ty = (int) (position.getY() + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
             if ((collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     || collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty))

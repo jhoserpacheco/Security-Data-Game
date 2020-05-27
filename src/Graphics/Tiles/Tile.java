@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author JUAN
+ * Clase encargada del manejo de Tiles
  */
 public class Tile {
     

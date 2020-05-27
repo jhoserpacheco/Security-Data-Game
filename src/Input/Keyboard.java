@@ -7,7 +7,7 @@ package Input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+//Clase encargada de leer las entradas por teclado
 public class Keyboard implements KeyListener {
 
     private final boolean[] keys;

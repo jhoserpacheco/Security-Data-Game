@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 /**
  *
  * @author JUAN
+ * 
+ * Clase encargada de crear la ventana de juego y el espacio de dibujo
  */
 public class Display {
 
@@ -27,7 +29,7 @@ public class Display {
         createDisplay();
     }
 
-    private void createDisplay() {
+    private void createDisplay() { 
         frame = new JFrame(title);
         frame.setSize(WIDTH, HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  *
  * @author JUAN
+ * Clase encargada de la carga de entidades globales
  */
 public class EntityManager {
 
@@ -109,7 +110,7 @@ public class EntityManager {
             gameObject.add(0, new Masks(handler, new Vector2D(384, 832), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
             gameObject.add(0, new Masks(handler, new Vector2D(384, 1472), 64, 64, Assets.mask, handler.getGame().getGameState(), true));
         }
-        if (handler.getLevel() == 7) {
+        if (handler.getLevel() == 8) {
             gameObject.clear();
             handler.setPlayer(new Player(handler, new Vector2D(handler.getWorld().getSpawnX(), handler.getWorld().getSpawnY()), 66, 127, Assets.stand1, handler.getGame().getGameState(), true));
             gameObject.add(handler.getPlayer());

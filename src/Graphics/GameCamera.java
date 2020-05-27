@@ -12,6 +12,7 @@ import Graphics.Tiles.Tile;
 /**
  *
  * @author JUAN
+ * clase encargada de mover la cámara del juego a través del escenario
  */
 public class GameCamera {
 

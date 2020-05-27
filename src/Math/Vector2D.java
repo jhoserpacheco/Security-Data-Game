@@ -8,6 +8,7 @@ package Math;
 /**
  *
  * @author JUAN
+ * Clase encargada del vector2D para posiciones de gameObjects
  */
 public class Vector2D {
     private double x,y;

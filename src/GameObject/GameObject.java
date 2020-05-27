@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author JUAN
+ * Clase que define los objetos tipo gameObject
  */
 public abstract class GameObject {
 
@@ -23,7 +24,7 @@ public abstract class GameObject {
     protected GameState gameState;
     protected Handler handler;
     protected int width, height;
-    protected Rectangle bounds;
+    protected Rectangle bounds; //hitbox
     protected boolean direction;
     protected boolean die;
 
@@ -35,7 +36,6 @@ public abstract class GameObject {
         this.width = width;
         this.height = height;
         this.direction = direction;
-
         bounds = new Rectangle(0, 0, width, height);
 
     }

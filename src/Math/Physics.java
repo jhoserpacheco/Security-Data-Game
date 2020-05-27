@@ -11,6 +11,7 @@ import java.util.ArrayList;
 /**
  *
  * @author JUAN
+ * Clase encargada de las colisiones
  */
 public class Physics {
     public static boolean Collision(GameObject player,GameObject object,ArrayList<GameObject> gameObject){

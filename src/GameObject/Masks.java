@@ -20,6 +20,7 @@ import java.util.ArrayList;
 /**
  *
  * @author JUAN
+ * Subclase encargada de cargar las máscaras 
  */
 public class Masks extends GameObject {
 
@@ -39,12 +40,10 @@ public class Masks extends GameObject {
     @Override
     public void update() {
         for (int i = 0; i < handler.getGameObject().size(); i++) {
-            if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) {
-                //System.out.println("hit");
-                maskSound.play();
-                
-                handler.setScore(handler.getScore()+1);
-                handler.getGameObject().remove((GameObject) handler.getGameObject().get(i));
+            if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) { //si hay colisión con el jugador
+                maskSound.play(); //suena coin
+                handler.setScore(handler.getScore()+1); //se añade 1 al puntaje
+                handler.getGameObject().remove((GameObject) handler.getGameObject().get(i)); //Se borra la máscara
             }
         }
 
@@ -53,9 +52,10 @@ public class Masks extends GameObject {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.yellow);
-        g.drawImage(texture, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), null);
-        //g.fillRect((int) (position.getX() + bounds.x - handler.getGameCamera().getxOffset()), (int) (position.getY() + bounds.y - handler.getGameCamera().getyOffset()) + 10, bounds.width, bounds.height); //dibujar rectangulo colisión
-
+        g.drawImage(texture, (int) (position.getX() - handler.getGameCamera().getxOffset()),
+                (int) (position.getY() - handler.getGameCamera().getyOffset()), null);
+        //g.fillRect((int) (position.getX() + bounds.x - handler.getGameCamera().getxOffset()),
+        //(int) (position.getY() + bounds.y - handler.getGameCamera().getyOffset()) + 10, bounds.width, bounds.height); //dibujar rectangulo colisión
     }
 
     @Override

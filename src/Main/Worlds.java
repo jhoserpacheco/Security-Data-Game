@@ -12,6 +12,7 @@ import java.io.File;
 /**
  *
  * @author JUAN
+ * Clase encargada de la carga de los mundos
  */
 public class Worlds {
 
@@ -42,7 +43,7 @@ public class Worlds {
                 handler.setWorld(new World(handler, new File("./generateWorld/world7.txt").getAbsolutePath()));
             }
             if (level == 8) {
-                handler.setWorld(new World(handler, new File("./generateWorld/world7.txt").getAbsolutePath()));
+                handler.setWorld(new World(handler, new File("./generateWorld/world8.txt").getAbsolutePath()));
             }            
             
         } catch (NullPointerException e) {

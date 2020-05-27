@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  *
  * @author JUAN
+ * Clase encargada de leer los Worlds correctamente
  */
 public class Utils {
 

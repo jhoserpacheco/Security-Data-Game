@@ -17,14 +17,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  *
  * @author JUAN
+ * Clase encargada de cargar los recursos gráficos, de sonido y de texto
  */
 public class Assets {
 
     private static final int width1 = 70, height1 = 127, width2 = 77, height2 = 125, width3 = 66, height3 = 127;
-    public static BufferedImage shootUp = null;
-    public static BufferedImage shootDown = null;
-    public static BufferedImage shootLeft = null;
-    public static BufferedImage shootRight = null;
     public static BufferedImage[] dieAnim = new BufferedImage[6];  
     public static BufferedImage stand1, stand2, stand3, //definir tiles
             stand4, stand5, stand6, run1, run2, run3, runFlip1, background, secData, soundOn, soundOff,
@@ -32,13 +29,12 @@ public class Assets {
             dashRight, dashLeft, dashRight2, dashLeft2, dashRight3, dashLeft3, die1, die2, die3, die4, die5, die6, die7, c, mask, inteface,
             portal, frag, redButton, yellowButton, greenButton, blueButton, jugar, jugarOver, salir1, salirOver;
     public static Font font;
-    public static Clip backMusic, glitchSound, maskSound;
+    public static Clip backMusic, glitchSound, maskSound,shock;
 
     public static void init() throws IOException, FontFormatException, LineUnavailableException, UnsupportedAudioFileException {
         Sprite sprite = new Sprite(Loader.ImageLoader("Tiles/SpriteSheet.png"));
         Sprite tiles = new Sprite(Loader.ImageLoader("Tiles/tile.png"));
         Sprite die = new Sprite(Loader.ImageLoader("Tiles/dieTile.png"));
-        Sprite shootTile = new Sprite(Loader.ImageLoader("Tiles/shootTile.png"));
         //sprite
         stand1 = sprite.crop(0, 0, width1, height1);
         stand2 = sprite.crop(width1, 0, width1, height1);
@@ -87,9 +83,8 @@ public class Assets {
         frag = tiles.crop(160, 192, 32, 32);
         //
 
-        keys = Loader.ImageLoader("Tiles/botones.png");
-        space = Loader.ImageLoader("Tiles/Space.png");
         //Interfaz
+        keys = Loader.ImageLoader("Tiles/botones.png");        
         c = Loader.ImageLoader("Tiles/c.png");
         mask = Loader.ImageLoader("Tiles/mask.png");
         inteface = Loader.ImageLoader("Tiles/interface.png");
@@ -106,13 +101,15 @@ public class Assets {
         soundOn = Loader.ImageLoader("Tiles/soundOn.png");
         soundOff = Loader.ImageLoader("Tiles/soundOff.png");
         //
-
-        font = Loader.loadFont("Tiles/font.ttf", 42); //fuente
+        
+        //fuente
+        font = Loader.loadFont("Tiles/font.ttf", 42); 
 
         //sonidos
         backMusic = Loader.loadSound("Tiles/soundtrack.wav");
         glitchSound = Loader.loadSound("Tiles/glitchSound.wav");
         maskSound = Loader.loadSound("Tiles/maskSound.wav");
+        shock = Loader.loadSound("Tiles/shock.wav");
         //
     }
 

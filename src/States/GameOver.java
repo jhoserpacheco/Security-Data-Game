@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author JUAN
+ * Estado de fin del juego
  */
 public class GameOver extends State {
 
@@ -35,7 +36,7 @@ public class GameOver extends State {
 
         handler.getGame().getGameState().getBackSound().stop();
         buttons = new ArrayList<>();
-        if (win && handler.getLevel() < 3) {
+        if (win && handler.getLevel() < 8) { //número de niveles 
             //botón avanzar nivel
             buttons.add(new Button(Assets.blueButton, Assets.redButton,
                     (handler.getGame().getWidth() / 2) - 100, (handler.getGame().getHeight() / 2), "Siguiente", 10,
@@ -44,7 +45,7 @@ public class GameOver extends State {
                 public void doAction() {
                     handler.setLevel(handler.getLevel() + 1);
                     State.setState(new GameState(handler, handler.getLevel()));
-                    handler.getGame().setGameState(new GameState(handler, handler.getLevel()));
+                    handler.getGame().setGameState((GameState)State.getState());
                 }
             }
             ));
@@ -108,10 +109,10 @@ public class GameOver extends State {
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
-        if (win && handler.getLevel() == 3) {
-            Text.DrawText(g, "FELICIDADES,EVITÓ EL HACKEO.", pos, Color.CYAN, Assets.font);
-        } else if (win && handler.getLevel() < 3) {
-            Text.DrawText(g, "NIVEL SUPERADO!", pos, Color.GREEN, Assets.font);
+        if (win && handler.getLevel() == 8) {
+            Text.DrawText(g, "FELICIDADES,EVITASTE EL HACKEO.", pos, Color.CYAN, Assets.font);
+        } else if (win && handler.getLevel() < 8) {
+            Text.DrawText(g,"NIVEL SUPERADO!",new Vector2D((int) (handler.getGame().getWidth() / 2) - 120, (int) (handler.getGame().getHeight() / 2) - 150), Color.GREEN, Assets.font);
         } else {
 
             Text.DrawText(g, "HAS SIDO HACKEADO..", pos, Color.RED, Assets.font);

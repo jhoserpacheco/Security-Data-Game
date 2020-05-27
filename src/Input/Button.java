@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author JUAN
+ * Clase encargada del manejo de botones
  */
 public class Button {
 

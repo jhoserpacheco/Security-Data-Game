@@ -11,6 +11,7 @@ import javax.sound.sampled.FloatControl;
 /**
  *
  * @author JUAN
+ * Clase encargada de los controles de sonido
  */
 public class Sound {
     private Clip clip;

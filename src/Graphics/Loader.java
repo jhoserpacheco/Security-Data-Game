@@ -19,6 +19,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  *
  * @author JUAN
+ * Clase para facilitar la carga de Assets
  */
 public class Loader {
 

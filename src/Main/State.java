@@ -7,7 +7,7 @@ package Main;
 
 import Display.Handler;
 import java.awt.Graphics;
-
+//Clase encargada del estado de juego, sea menú,juego, fin del juego o pausa
 public abstract class State {
 
     private static State currentState = null;

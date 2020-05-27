@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+
+//Clase global de control del juego
 public class Game implements Runnable {
 
     private Display display;
@@ -36,8 +38,8 @@ public class Game implements Runnable {
     private Handler handler;
     public static int width, height;
     private boolean running = false;
-    private BufferStrategy bs;//definir bufferStrategy (organiza espacios de memoria en el canvas)
-    private Graphics g; //objeto tipo gráfico
+    private BufferStrategy bs;
+    private Graphics g; 
     private final String title;
     private final int FPS = 60;
     private final double TARGETTIME = 1000000000 / FPS;
@@ -60,14 +62,14 @@ public class Game implements Runnable {
         display.getFrame().addKeyListener(keyBoard);
         display.getCanvas().addMouseListener(mouse);
         display.getCanvas().addMouseMotionListener(mouse);
-        Assets.init();
+        Assets.init(); //inicializar Assets
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
-        handler.setLevel(2); //nivel inicial
+        handler.setLevel(1); //nivel inicial
         gameState = new GameState(handler,handler.getLevel());
         handler.getGame().getGameState().getBackSound().stop();
         menuState = new MenuState(handler);
-        State.setState(menuState); //Cambiar para cambiar entre estados
+        State.setState(menuState); //Estado inicial
     }
 
     public GameState getGameState() {

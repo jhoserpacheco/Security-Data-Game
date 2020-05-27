@@ -5,12 +5,16 @@
  */
 package Graphics;
 
+import Display.Handler;
+import Main.State;
 import Math.Vector2D;
+import States.GameOver;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author JUAN
+ * Clase encargada de las animaciones estáticas
  */
 public class Animation {
 
@@ -20,8 +24,10 @@ public class Animation {
     private boolean running;
     private Vector2D position;
     private long time, lastTime;
+    private Handler handler;
 
-    public Animation(BufferedImage[] frames, int velocity, Vector2D position) {
+    public Animation(Handler handler,BufferedImage[] frames, int velocity, Vector2D position) {
+        this.handler = handler;
         this.frames = frames;
         this.velocity = velocity;
         this.position = position;
@@ -40,6 +46,7 @@ public class Animation {
             index++;
             if (index >= frames.length) {
                 running = false;
+                State.setState(new GameOver(handler,false));
             }
 
         }
