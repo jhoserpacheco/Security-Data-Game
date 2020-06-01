@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GameObject;
 
 import Display.Handler;
@@ -11,9 +6,7 @@ import Math.Vector2D;
 import java.util.ArrayList;
 
 /**
- *
- * @author JUAN
- * Clase encargada de la carga de entidades globales
+ * Carga todas las entidades
  */
 public class EntityManager {
 

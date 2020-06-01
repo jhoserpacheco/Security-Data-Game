@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Display;
 
 import java.awt.Canvas;
@@ -10,9 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
- *
- * @author JUAN
- * 
  * Clase encargada de crear la ventana de juego y el espacio de dibujo
  */
 public class Display {
@@ -29,6 +21,9 @@ public class Display {
         createDisplay();
     }
 
+    /**
+     * Crea la ventana del juego
+     */
     private void createDisplay() { 
         frame = new JFrame(title);
         frame.setSize(WIDTH, HEIGHT);
@@ -46,9 +41,7 @@ public class Display {
         frame.add(canvas);
 
         frame.pack();
-    }
-    
-
+    }    
 
     public Canvas getCanvas() {
         return canvas;
@@ -60,7 +53,5 @@ public class Display {
 
     public JFrame getFrame() {
         return frame;
-    }
-    
-    
+    } 
 }

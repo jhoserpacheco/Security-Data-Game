@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package States;
 
 import Display.Handler;
@@ -19,9 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author JUAN
- * Clase encargada de pausar el juego
+ * Estado de pausa
  */
 public class PauseState extends State {
 

@@ -1,23 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GameObject;
 
 import Display.Handler;
 import Graphics.Tiles.Tile;
 import Math.Vector2D;
 import States.GameState;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- *
- * @author JUAN
+ * NO IMPLEMENTADO. Se encarga del disparo
  */
 public class Shoot extends Creature {
 
@@ -32,10 +25,10 @@ public class Shoot extends Creature {
         handler = handler;
         gameObject = gameState.getGameObject();
         direction = direction;
-        bounds.x = 0; //inicio de rectangulo colisión en x
-        bounds.y = 0;//inicio de rectangulo colisión en y
-        bounds.width = texture.getWidth() - 30; //fin de rectangulo colisión en x
-        bounds.height = 5; //fin de rectangulo colisión en y
+        bounds.x = 0; // Inicio de rectangulo colisión en x
+        bounds.y = 0; // Inicio de rectangulo colisión en y
+        bounds.width = texture.getWidth() - 30; // Fin de rectangulo colisión en x
+        bounds.height = 5; // Fin de rectangulo colisión en y
 
     }
 

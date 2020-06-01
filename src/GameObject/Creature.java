@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GameObject;
 
 import Display.Handler;
@@ -13,9 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author JUAN
- * Subclase de gameObject encargada de los movimientos del jugador y demás objetos móviles
+ * Movimiento de los criaturas moviles (incluye el jugador)
  */
 public abstract class Creature extends GameObject {
 
@@ -32,8 +25,10 @@ public abstract class Creature extends GameObject {
         grounded = false;
 
     }
-    
- //método para ejecutar movimientos y detección de colisiones
+
+    /**
+     * Ejecuta movimientos y detecta colisiones
+     */
     public void move() {
         yHit();
         xHit();
@@ -42,49 +37,61 @@ public abstract class Creature extends GameObject {
 
     }
 
+    /**
+     * Movimiento horizontal
+     */
     public void moveX() {
-        if (xMove > 0) {//izquierda
+        // Izquierda
+        if (xMove > 0) {
             int tx = (int) (position.getX() + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
+            
             if (!collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     && !collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                position.setX(position.getX() + xMove);//si no está colisionando, moverse hacia izquierda
+                position.setX(position.getX() + xMove);// Si no está colisionando se mueve hacia la izquierda
 
             } else {
 
                 position.setX(tx * Tile.TILEWIDTH - bounds.x - bounds.width - 1);
 
             }
-        } else if (xMove < 0) { //derecha
+        // Derecha
+        } else if (xMove < 0) {
             int tx = (int) (position.getX() + xMove + bounds.x) / Tile.TILEWIDTH;
+            
             if (!collisionWithTile(tx, (int) (position.getY() + bounds.y) / Tile.TILEHEIGHT)
                     && !collisionWithTile(tx, (int) (position.getY() + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                position.setX(position.getX() + xMove);//si no está colisionando, moverse hacia derecha
+                position.setX(position.getX() + xMove);// Si no está colisionando se mueve hacia la derecha
 
             } else {
                 position.setX(tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x);
 
             }
-
         }
     }
 
+    /**
+     * Movimiento vertical
+     */
     public void moveY() {
-        if (yMove < 0) { //subir
+        // Arriba
+        if (yMove < 0) {
             int ty = (int) (position.getY() + yMove + bounds.y) / Tile.TILEHEIGHT;
+            
             if (!collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     && !collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                position.setY(position.getY() + yMove); //si no está colisionando, moverse hacia arriba
+                position.setY(position.getY() + yMove);// Si no está colisionando se mueve hacia arriba
 
             } else {
 
                 position.setY(ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.y);
 
             }
-        } else if (yMove > 0) { //bajar
+        // Abajo
+        } else if (yMove > 0) {
             int ty = (int) (position.getY() + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
             if (!collisionWithTile((int) (position.getX() + bounds.x) / Tile.TILEWIDTH, ty)
                     && !collisionWithTile((int) (position.getX() + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                position.setY(position.getY() + yMove); //si no está colisionando, moverse hacia abajo
+                position.setY(position.getY() + yMove);// Si no está colisionando se mueve hacia abajo
                 grounded = false;
 
             } else {
@@ -97,6 +104,7 @@ public abstract class Creature extends GameObject {
 
         }
     }
+    
 //-----------
 
     public void xHit() {

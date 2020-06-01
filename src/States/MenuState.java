@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package States;
 
+import Display.Display;
 import Display.Handler;
 import Graphics.Assets;
 import Input.Action;
@@ -12,13 +8,13 @@ import Input.Button;
 import Main.State;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
- *
- * @author JUAN
+ * Estado de menu
  */
 public class MenuState extends State {
-
+    
     private ArrayList<Button> buttons;
     private GameState gameState;
 
@@ -33,8 +29,7 @@ public class MenuState extends State {
                 "", 20, new Action() {
             @Override
             public void doAction() {
-                gameState = new GameState(handler,handler.getLevel());
-                
+                gameState = new GameState(handler,handler.getLevel());                
                 State.setState(gameState);
             }
         }));
@@ -67,5 +62,5 @@ public class MenuState extends State {
             b.draw(g);
         }
     }
-
+    
 }

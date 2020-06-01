@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Main;
 
 import Display.Display;
@@ -26,7 +21,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-//Clase global de control del juego
+/**
+ * Controla el codigo del juego
+ */
 public class Game implements Runnable {
 
     private Display display;
@@ -54,7 +51,6 @@ public class Game implements Runnable {
         this.title = title;
         keyBoard = new Keyboard();
         mouse = new Mouse();
-
     }
 
     private void init() throws IOException, FontFormatException, FontFormatException, LineUnavailableException, LineUnavailableException, UnsupportedAudioFileException, InterruptedException { //Método inicializar

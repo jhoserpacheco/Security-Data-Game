@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Graphics.Tiles;
 
 import Math.Vector2D;
@@ -10,22 +5,17 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author JUAN
- * Clase encargada del manejo de Tiles
+ * Maneja los tiles
  */
 public class Tile {
     
-    //Static variables
     public static Tile[] tiles = new Tile[256];
-    public static Tile wallTile = new WallTile(0);//Paredes y piso
-    public static Tile floorTile = new FloorTile(1); //fondo
-    public static Tile doorTile = new DoorTile(2); //Puertas
-    public static Tile limitsTile = new limitsTile(3); //borde del mapa
-    public static Tile portalTile = new PortalTile(4); //portal fin del juego
-    public static Tile fragTile = new FragTile(5); //tile de daño desfragmentado
-    
-    //Clase
+    public static Tile wallTile = new WallTile(0);// Paredes y piso
+    public static Tile floorTile = new FloorTile(1); //Fondo
+    public static Tile doorTile = new DoorTile(2); // Puertas
+    public static Tile limitsTile = new limitsTile(3); // Borde del mapa
+    public static Tile portalTile = new PortalTile(4); // Portal fin del juego
+    public static Tile fragTile = new FragTile(5); // Tile de daño desfragmentado
     
     protected BufferedImage texture;
     protected final int id;
@@ -35,8 +25,7 @@ public class Tile {
     public Tile(BufferedImage texture,int id){
         this.texture = texture;
         this.id = id;
-        tiles[id] = this;
-        
+        tiles[id] = this;        
     }
     
     public void update(){

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Utils;
 
 import java.io.BufferedReader;
@@ -10,13 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- *
- * @author JUAN
  * Clase encargada de leer los Worlds correctamente
  */
 public class Utils {
 
-    public static String loadFileAsString(String path) { //Cargar archivos de mapa en formato .txt
+    /**
+     * Cargar archivos de mapa en formato .txt
+     */
+    public static String loadFileAsString(String path) {
         StringBuilder builder = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));

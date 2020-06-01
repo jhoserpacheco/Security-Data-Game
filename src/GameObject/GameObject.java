@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GameObject;
 
 import Display.Handler;
@@ -13,9 +9,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author JUAN
- * Clase que define los objetos tipo gameObject
+ * Define las propiedades generales los objetos del juego
  */
 public abstract class GameObject {
 
@@ -63,7 +57,4 @@ public abstract class GameObject {
     public int getHeight() {
         return height;
     }
-
-
-
 }
