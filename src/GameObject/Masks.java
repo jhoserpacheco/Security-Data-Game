@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GameObject;
 
 import Display.Handler;
@@ -18,9 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- *
- * @author JUAN
- * Subclase encargada de cargar las máscaras 
+ * Carga las mascaras
  */
 public class Masks extends GameObject {
 
@@ -30,23 +23,22 @@ public class Masks extends GameObject {
     public Masks(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
         gameObject = handler.getGameObject();
-        bounds.x = 0; //inicio de rectangulo colisión en x
-        bounds.y = 0;//inicio de rectangulo colisión en y
-        bounds.width = texture.getWidth(); //fin de rectangulo colisión en x
-        bounds.height = texture.getHeight(); //fin de rectangulo colisión en y  
+        bounds.x = 0; // Inicio de rectangulo colisión en x
+        bounds.y = 0;// Inicio de rectangulo colisión en y
+        bounds.width = texture.getWidth(); // Fin de rectangulo colisión en x
+        bounds.height = texture.getHeight(); // Fin de rectangulo colisión en y  
         maskSound = new Sound(Assets.maskSound);
     }
 
     @Override
     public void update() {
         for (int i = 0; i < handler.getGameObject().size(); i++) {
-            if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) { //si hay colisión con el jugador
-                maskSound.play(); //suena coin
-                handler.setScore(handler.getScore()+1); //se añade 1 al puntaje
-                handler.getGameObject().remove((GameObject) handler.getGameObject().get(i)); //Se borra la máscara
+            if (Physics.Collision(this, (GameObject) handler.getGameObject().get(i), handler.getGameObject())) { // Si colisiona con el jugador
+                maskSound.play(); // Sonido de captura
+                handler.setScore(handler.getScore()+1); // Se agrega al puntaje
+                handler.getGameObject().remove((GameObject) handler.getGameObject().get(i)); // Se borra la máscara
             }
         }
-
     }
 
     @Override
@@ -54,8 +46,6 @@ public class Masks extends GameObject {
         g.setColor(Color.yellow);
         g.drawImage(texture, (int) (position.getX() - handler.getGameCamera().getxOffset()),
                 (int) (position.getY() - handler.getGameCamera().getyOffset()), null);
-        //g.fillRect((int) (position.getX() + bounds.x - handler.getGameCamera().getxOffset()),
-        //(int) (position.getY() + bounds.y - handler.getGameCamera().getyOffset()) + 10, bounds.width, bounds.height); //dibujar rectangulo colisión
     }
 
     @Override

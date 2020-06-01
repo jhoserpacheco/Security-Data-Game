@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Graphics;
 
 import Graphics.Tiles.Sprite;
@@ -15,9 +10,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
- * @author JUAN
- * Clase encargada de cargar los recursos gráficos, de sonido y de texto
+ * Importa los recursos
  */
 public class Assets {
 
@@ -35,7 +28,8 @@ public class Assets {
         Sprite sprite = new Sprite(Loader.ImageLoader("Tiles/SpriteSheet.png"));
         Sprite tiles = new Sprite(Loader.ImageLoader("Tiles/tile.png"));
         Sprite die = new Sprite(Loader.ImageLoader("Tiles/dieTile.png"));
-        //sprite
+        
+        // SpriteSheet
         stand1 = sprite.crop(0, 0, width1, height1);
         stand2 = sprite.crop(width1, 0, width1, height1);
         stand3 = sprite.crop(width1 * 2, 0, width1, height1);
@@ -48,12 +42,16 @@ public class Assets {
         runFlip1 = sprite.crop(width2 * 3, height1, width2, height2);
         runFlip2 = sprite.crop(width2 * 4, height1, width2, height2);
         runFlip3 = sprite.crop(width2 * 5, height1, width2, height2);
+       
+        // Dash
         dashRight = Loader.ImageLoader("Tiles/glitchRight.png");
         dashLeft = Loader.ImageLoader("Tiles/glitchLeft.png");
         dashRight2 = Loader.ImageLoader("Tiles/glitchRight2.png");
         dashLeft2 = Loader.ImageLoader("Tiles/glitchLeft2.png");
         dashRight3 = Loader.ImageLoader("Tiles/glitchRight3.png");
         dashLeft3 = Loader.ImageLoader("Tiles/glitchLeft3.png");
+        
+        // Animacion de muerte
         die1 = die.crop(0, 0, width3, height3);
         die2 = die.crop(width3, 0, width3, height3);
         die3 = die.crop(width3 * 2, 0, width3, height3);
@@ -67,21 +65,21 @@ public class Assets {
         dieAnim[4] =die5; 
         dieAnim[5] =die6; 
 
-        //
+        // NO IMPLEMENTADO. Relacionado con el disparo
         /**
          * shootUp = shootTile.crop(0, 0, 54, 94); shootDown =
          * shootTile.crop(54, 0, 54, 94); shootLeft = shootTile.crop(202, 0, 94,
          * 54); shootRight = shootTile.crop(108, 0, 94, 54);
          *
          */
-        //Tiles del mundo
+                
+        // Texturas
         wall = tiles.crop(64, 160, 32, 32);
         floor = tiles.crop(32, 96, 32, 32);
         door = tiles.crop(160, 32, 32, 32);
         limits = limits = tiles.crop(32, 224, 32, 32);
         portal = tiles.crop(32, 256, 32, 32);
         frag = tiles.crop(160, 192, 32, 32);
-        //
 
         //Interfaz
         keys = Loader.ImageLoader("Tiles/botones.png");        
@@ -100,17 +98,15 @@ public class Assets {
         secData = Loader.ImageLoader("Tiles/securityData.png");
         soundOn = Loader.ImageLoader("Tiles/soundOn.png");
         soundOff = Loader.ImageLoader("Tiles/soundOff.png");
-        //
         
-        //fuente
+        // Fuente
         font = Loader.loadFont("Tiles/font.ttf", 42); 
 
-        //sonidos
+        // Soundtrack
         backMusic = Loader.loadSound("Tiles/soundtrack.wav");
         glitchSound = Loader.loadSound("Tiles/glitchSound.wav");
         maskSound = Loader.loadSound("Tiles/maskSound.wav");
         shock = Loader.loadSound("Tiles/shock.wav");
-        //
     }
 
 }

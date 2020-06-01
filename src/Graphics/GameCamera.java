@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Graphics;
 
 import Display.Handler;
@@ -10,9 +6,7 @@ import GameObject.GameObject;
 import Graphics.Tiles.Tile;
 
 /**
- *
- * @author JUAN
- * clase encargada de mover la cámara del juego a través del escenario
+ * Se encarga de la camara
  */
 public class GameCamera {
 
@@ -24,7 +18,10 @@ public class GameCamera {
         this.yOffset = yOffset;
         
     }
-//No mostrar nada fuera del limite de mapa
+
+    /**
+     * No mostrar nada fuera del limite de mapa
+     */
     public void checkBlankSpace() {  
 
         if (xOffset < 0) {
@@ -42,13 +39,22 @@ public class GameCamera {
     }
     
 
-    public void move(float xAmt, float yAmt) { //movimiento de cámara
+    /**
+     * Movimiento de la camara
+     * @param xAmt
+     * @param yAmt 
+     */
+    public void move(float xAmt, float yAmt) {
         xOffset += xAmt;
         yOffset += yAmt;
        checkBlankSpace();
     }
 
-    public void centerOnPlayer(GameObject e) { //centrar cámara en el jugador
+    /**
+     * Centra la camara en el jugador
+     * @param e 
+     */
+    public void centerOnPlayer(GameObject e) {
         xOffset = (float) (e.getPosition().getX() - handler.getGame().getWidth() / 2) + e.getWidth()/2;
         yOffset = (float) (e.getPosition().getY() - handler.getGame().getHeight() / 2+ e.getHeight()/2);
         checkBlankSpace();

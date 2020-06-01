@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Display;
 
 import GameObject.GameObject;
@@ -14,8 +9,6 @@ import Main.Game;
 import java.util.ArrayList;
 
 /**
- *
- * @author JUAN
  * Clase encargada de guardar los parámetros globales del juego
  */
 public class Handler {
@@ -29,8 +22,7 @@ public class Handler {
     private Player player;
     
     public Handler(Game game){
-        this.game= game;
-        
+        this.game= game;        
     }
     
     public GameCamera getGameCamera(){
@@ -52,7 +44,6 @@ public class Handler {
         return world;
     }
     
-
     public void setWorld(World world) {
         this.world = world;
     }
@@ -103,10 +94,5 @@ public class Handler {
 
     public void setScore(int score) {
         this.score = score;
-    }
-    
-    
-    
-    
-    
+    }  
 }

@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Main;
 
 import Display.Handler;
 import java.awt.Graphics;
-//Clase encargada del estado de juego, sea menú,juego, fin del juego o pausa
+
+/**
+ * Se encarga de los estados
+ */
 public abstract class State {
 
     private static State currentState = null;

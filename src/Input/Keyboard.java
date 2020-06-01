@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-//Clase encargada de leer las entradas por teclado
+
+/**
+ * Clase encargada de leer las entradas por teclado
+ */
 public class Keyboard implements KeyListener {
 
     private final boolean[] keys;

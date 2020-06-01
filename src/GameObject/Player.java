@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GameObject;
 
 import Display.Handler;
@@ -16,9 +11,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 /**
- *
- * @author JUAN Subclase encargada de definir las acciones y animaciones del
- * jugador
+ * Acciones y animaciones del jugador
  */
 public class Player extends Creature {
 
@@ -33,12 +26,11 @@ public class Player extends Creature {
     public Player(Handler handler, Vector2D position, int width, int height, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
         gameObject = handler.getGameObject();
-        bounds.x = 20; //inicio de rectangulo colisión en x
-        bounds.y = 66;//inicio de rectangulo colisión en y
-        bounds.width = 25; //fin de rectangulo colisión en x
-        bounds.height = 61; //fin de rectangulo colisión en y
+        bounds.x = 20; // Inicio de rectangulo de colisión en x
+        bounds.y = 66;// Inicio de rectangulo de colisión en y
+        bounds.width = 25; // Fin de rectangulo de colisión en x
+        bounds.height = 61; // Fin de rectangulo de colisión en y
         gameOverP = false;
-
     }
 
     @Override
@@ -50,15 +42,17 @@ public class Player extends Creature {
     public void update() {
         time += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();
-        if (!gameOver(gameOverP)) { //si no ha perdido
-            if (Keyboard.DASH && Keyboard.RIGHT && !Keyboard.LEFT) { //moverse derecha con dash
+        if (!gameOver(gameOverP)) { // Si no ha perdido
+            if (Keyboard.DASH && Keyboard.RIGHT && !Keyboard.LEFT) { // Moverse a la derecha con dash
                 position.setX(position.getX() + dash);
             }
 
-            if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) { //moverse izquierda con dash
+            if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) { // Moverse a la izquierda con dash
                 position.setX(position.getX() - dash);
             }
 
+            // NO IMPLEMENTADO. Relacionado con el disparo
+            
             /**
              * if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
              * gameState.getGameObject().add(0, new Shoot(handler, new
@@ -82,17 +76,21 @@ public class Player extends Creature {
              * 3)), 70, 40, 10, 0, Assets.shootRight, gameState, true)); time =
              * 0; }
              */
+            
             getInput();
             move();
             handler.getGameCamera().centerOnPlayer(this);
         }
     }
 
-    private void getInput() { //Recibir entradas de teclado 
+    /**
+     * Keybinds
+     */
+    private void getInput() {
         if (!gameOver(gameOverP)) {
             xMove = 0;
             yMove = 0;
-            if (Keyboard.UP) { //flecha arriba / salto
+            if (Keyboard.UP) {
 
                 if (jump > 0) {
                     yMove = (float) -jump;
@@ -119,10 +117,10 @@ public class Player extends Creature {
                 yMove = (float) +gravity;
             } else {
 
-                if (Keyboard.RIGHT) { //flecha derecha
+                if (Keyboard.RIGHT) {
                     xMove = (float) speed;
                 }
-                if (Keyboard.LEFT) { //flecha izquierda
+                if (Keyboard.LEFT) {
                     xMove = (float) -speed;
                 }
             }
@@ -138,8 +136,8 @@ public class Player extends Creature {
     public void draw(Graphics g) {
         //Animaciones del jugador
 
-        if (!gameOver(gameOverP)) { //si no ha perdido..
-            //Animación cuando aprieta derecha e izquierda a la vez
+        if (!gameOver(gameOverP)) { // Si no ha perdido
+            // Animación cuando aprieta derecha e izquierda a la vez
             if (Keyboard.RIGHT && Keyboard.LEFT) {
                 if (time > 0 && time < 300) {
                     g.drawImage(Assets.stand1, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
@@ -161,7 +159,7 @@ public class Player extends Creature {
                 }
             } else {
 
-                //animación de caminar hacia adelante
+                // Animación de caminar hacia adelante
                 if (Keyboard.RIGHT && !Keyboard.DASH) {
                     if (time > 0 && time < 200) {
                         g.drawImage(Assets.run1, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width + 15, height, null);
@@ -174,7 +172,7 @@ public class Player extends Creature {
                         g.drawImage(Assets.run3, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width + 15, height, null);
                         time = 0;
                     }
-                }//animación de caminar hacia atrás
+                } // Animación de caminar hacia atrás
                 else if (Keyboard.LEFT && !Keyboard.DASH) {
                     if (time > 0 && time < 200) {
                         g.drawImage(Assets.runFlip1, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width + 15, height, null);
@@ -190,7 +188,7 @@ public class Player extends Creature {
                 }
                 
                 
-                //Animación quieto
+                // Animación quieto
             }
             if (!Keyboard.LEFT && !Keyboard.RIGHT) {
 

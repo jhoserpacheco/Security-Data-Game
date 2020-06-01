@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Main;
 
 import Display.Handler;
@@ -10,16 +5,12 @@ import Graphics.Tiles.World;
 import java.io.File;
 
 /**
- *
- * @author JUAN
  * Clase encargada de la carga de los mundos
  */
 public class Worlds {
 
+    public Worlds(Handler handler, int level) {
 
-
-    public Worlds(Handler handler,int level){
-    
         try {
             if (level == 1) {
                 handler.setWorld(new World(handler, new File("./generateWorld/world1.txt").getAbsolutePath()));
@@ -35,7 +26,7 @@ public class Worlds {
             }
             if (level == 5) {
                 handler.setWorld(new World(handler, new File("./generateWorld/world5.txt").getAbsolutePath()));
-            }            
+            }
             if (level == 6) {
                 handler.setWorld(new World(handler, new File("./generateWorld/world6.txt").getAbsolutePath()));
             }
@@ -44,11 +35,11 @@ public class Worlds {
             }
             if (level == 8) {
                 handler.setWorld(new World(handler, new File("./generateWorld/world8.txt").getAbsolutePath()));
-            }            
-            
+            }
+
         } catch (NullPointerException e) {
 
         }
-        
+
     }
 }

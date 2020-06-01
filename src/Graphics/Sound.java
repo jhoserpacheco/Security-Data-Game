@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Graphics;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
 /**
- *
- * @author JUAN
- * Clase encargada de los controles de sonido
+ * Se encarga de los controles de sonido
  */
 public class Sound {
     private Clip clip;
