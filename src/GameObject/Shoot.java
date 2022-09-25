@@ -18,16 +18,16 @@ public class Shoot extends Creature {
 
     public Shoot(Handler handler, Vector2D position, int width, int height, int xDir, int yDir, BufferedImage texture, GameState gameState, boolean direction) {
         super(handler, position, width, height, texture, gameState, direction);
-        height = height;
-        width = width;
+        super.height = height;
+        super.width = width;
         xDir = xDir;
         yDir = yDir;
-        handler = handler;
+        super.handler = handler;
         gameObject = gameState.getGameObject();
-        direction = direction;
+        super.direction = direction;
         bounds.x = 0; // Inicio de rectangulo colisión en x
         bounds.y = 0; // Inicio de rectangulo colisión en y
-        bounds.width = texture.getWidth() - 30; // Fin de rectangulo colisión en x
+        bounds.width = texture.getWidth() - 10; // Fin de rectangulo colisión en x
         bounds.height = 5; // Fin de rectangulo colisión en y
 
     }

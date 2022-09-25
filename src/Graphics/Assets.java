@@ -15,20 +15,21 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Assets {
 
     private static final int width1 = 70, height1 = 127, width2 = 77, height2 = 125, width3 = 66, height3 = 127;
-    public static BufferedImage[] dieAnim = new BufferedImage[6];  
-    public static BufferedImage stand1, stand2, stand3, //definir tiles
+    public static BufferedImage[] dieAnim = new BufferedImage[6];
+    public static BufferedImage stand1, stand2, stand3,//definir tiles
+            shootUp, shootDown, shootLeft, shootRight,
             stand4, stand5, stand6, run1, run2, run3, runFlip1, background, secData, soundOn, soundOff,
             runFlip2, runFlip3, wall, floor, door, limits, shootTile, keys, space,
             dashRight, dashLeft, dashRight2, dashLeft2, dashRight3, dashLeft3, die1, die2, die3, die4, die5, die6, die7, c, mask, inteface,
-            portal, frag, redButton, yellowButton, greenButton, blueButton, jugar, jugarOver, salir1, salirOver;
+            portal, frag, redButton, yellowButton, greenButton, blueButton, jugar, random, randomOver, jugarOver, salir1, salirOver;
     public static Font font;
-    public static Clip backMusic, glitchSound, maskSound,shock;
+    public static Clip backMusic, glitchSound, maskSound, shock;
 
     public static void init() throws IOException, FontFormatException, LineUnavailableException, UnsupportedAudioFileException {
         Sprite sprite = new Sprite(Loader.ImageLoader("Tiles/SpriteSheet.png"));
         Sprite tiles = new Sprite(Loader.ImageLoader("Tiles/tile.png"));
         Sprite die = new Sprite(Loader.ImageLoader("Tiles/dieTile.png"));
-        
+        Sprite sTile = new Sprite(Loader.ImageLoader("Tiles/shootTile.png"));
         // SpriteSheet
         stand1 = sprite.crop(0, 0, width1, height1);
         stand2 = sprite.crop(width1, 0, width1, height1);
@@ -42,7 +43,7 @@ public class Assets {
         runFlip1 = sprite.crop(width2 * 3, height1, width2, height2);
         runFlip2 = sprite.crop(width2 * 4, height1, width2, height2);
         runFlip3 = sprite.crop(width2 * 5, height1, width2, height2);
-       
+
         // Dash
         dashRight = Loader.ImageLoader("Tiles/glitchRight.png");
         dashLeft = Loader.ImageLoader("Tiles/glitchLeft.png");
@@ -50,7 +51,7 @@ public class Assets {
         dashLeft2 = Loader.ImageLoader("Tiles/glitchLeft2.png");
         dashRight3 = Loader.ImageLoader("Tiles/glitchRight3.png");
         dashLeft3 = Loader.ImageLoader("Tiles/glitchLeft3.png");
-        
+
         // Animacion de muerte
         die1 = die.crop(0, 0, width3, height3);
         die2 = die.crop(width3, 0, width3, height3);
@@ -58,21 +59,19 @@ public class Assets {
         die4 = die.crop(width3 * 3, 0, width3, height3);
         die5 = die.crop(width3 * 4, 0, width3, height3);
         die6 = die.crop(width3 * 5, 0, width3, height3);
-        dieAnim[0] = die1; 
-        dieAnim[1] =die2; 
-        dieAnim[2] =die3; 
-        dieAnim[3] =die4; 
-        dieAnim[4] =die5; 
-        dieAnim[5] =die6; 
+        dieAnim[0] = die1;
+        dieAnim[1] = die2;
+        dieAnim[2] = die3;
+        dieAnim[3] = die4;
+        dieAnim[4] = die5;
+        dieAnim[5] = die6;
 
-        // NO IMPLEMENTADO. Relacionado con el disparo
-        /**
-         * shootUp = shootTile.crop(0, 0, 54, 94); shootDown =
-         * shootTile.crop(54, 0, 54, 94); shootLeft = shootTile.crop(202, 0, 94,
-         * 54); shootRight = shootTile.crop(108, 0, 94, 54);
-         *
-         */
-                
+        // disparos
+        shootLeft = sTile.crop(202, 0, 94, 54);
+        shootRight = sTile.crop(108, 0, 94, 54);
+        shootUp = sTile.crop(0, 0, 54, 94);
+        shootDown = sTile.crop(54, 0, 54, 94);
+
         // Texturas
         wall = tiles.crop(64, 160, 32, 32);
         floor = tiles.crop(32, 96, 32, 32);
@@ -82,7 +81,7 @@ public class Assets {
         frag = tiles.crop(160, 192, 32, 32);
 
         //Interfaz
-        keys = Loader.ImageLoader("Tiles/botones.png");        
+        keys = Loader.ImageLoader("Tiles/botones.png");
         c = Loader.ImageLoader("Tiles/c.png");
         mask = Loader.ImageLoader("Tiles/mask.png");
         inteface = Loader.ImageLoader("Tiles/interface.png");
@@ -91,6 +90,8 @@ public class Assets {
         yellowButton = Loader.ImageLoader("Tiles/yellowButton.png");
         blueButton = Loader.ImageLoader("Tiles/blueButton.png");
         jugar = Loader.ImageLoader("Tiles/jugar.png");
+        random = Loader.ImageLoader("Tiles/random.png");
+        randomOver = Loader.ImageLoader("Tiles/randomOver.png");
         jugarOver = Loader.ImageLoader("Tiles/jugarOver.png");
         salir1 = Loader.ImageLoader("Tiles/salir.png");
         salirOver = Loader.ImageLoader("Tiles/salirOver.png");
@@ -98,9 +99,9 @@ public class Assets {
         secData = Loader.ImageLoader("Tiles/securityData.png");
         soundOn = Loader.ImageLoader("Tiles/soundOn.png");
         soundOff = Loader.ImageLoader("Tiles/soundOff.png");
-        
+
         // Fuente
-        font = Loader.loadFont("Tiles/font.ttf", 42); 
+        font = Loader.loadFont("Tiles/font.ttf", 42);
 
         // Soundtrack
         backMusic = Loader.loadSound("Tiles/soundtrack.wav");

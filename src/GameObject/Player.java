@@ -7,7 +7,9 @@ import States.GameState;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import Graphics.Assets;
+import Graphics.Tiles.World;
 import java.awt.Rectangle;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -50,33 +52,28 @@ public class Player extends Creature {
             if (Keyboard.DASH && Keyboard.LEFT && !Keyboard.RIGHT) { // Moverse a la izquierda con dash
                 position.setX(position.getX() - dash);
             }
-
             // NO IMPLEMENTADO. Relacionado con el disparo
-            
-            /**
-             * if (Keyboard.SHOOT && Keyboard.LEFT && time > 300) {
-             * gameState.getGameObject().add(0, new Shoot(handler, new
-             * Vector2D((int) (position.getX() -
-             * handler.getGameCamera().getxOffset()), (int) (position.getY() -
-             * handler.getGameCamera().getyOffset()) + (texture.getHeight() /
-             * 3)), 70, 40, 10, 0, Assets.shootLeft, gameState, false)); time =
-             * 0; } if (Keyboard.SHOOT && Keyboard.RIGHT && time > 300) {
-             * gameState.getGameObject().add(0, new Shoot(handler, new
-             * Vector2D((int) (position.getX() -
-             * handler.getGameCamera().getxOffset()), (int) ((position.getY() -
-             * handler.getGameCamera().getyOffset()) + (texture.getHeight() /
-             * 3))), 70, 40, 10, 0, Assets.shootRight, gameState, true)); time =
-             * 0; }
-             *
-             * if (Keyboard.SHOOT && !Keyboard.RIGHT && !Keyboard.LEFT && time >
-             * 300) { gameState.getGameObject().add(0, new Shoot(handler, new
-             * Vector2D((int) (position.getX() -
-             * handler.getGameCamera().getxOffset()), (int) (position.getY() -
-             * handler.getGameCamera().getyOffset()) + (texture.getHeight() /
-             * 3)), 70, 40, 10, 0, Assets.shootRight, gameState, true)); time =
-             * 0; }
-             */
-            
+            if (Keyboard.SHOOT && Keyboard.LEFT && !Keyboard.RIGHT) {
+                gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
+                        - handler.getGameCamera().getxOffset()), (int) (position.getY()
+                        - handler.getGameCamera().getyOffset()) + (texture.getHeight()
+                        / 3)), 70, 40, 10, 0, Assets.shootLeft, gameState, false));
+                time = 0;
+
+                this.setPosition(new Vector2D(position.getX() - 65, position.getY()));
+
+            }
+            if (Keyboard.SHOOT && Keyboard.RIGHT && !Keyboard.LEFT) {
+                gameState.getGameObject().add(0, new Shoot(handler, new Vector2D((int) (position.getX()
+                        - handler.getGameCamera().getxOffset()), (int) ((position.getY()
+                        - handler.getGameCamera().getyOffset()) + (texture.getHeight()
+                        / 3))), 70, 40, 10, 0, Assets.shootRight, gameState, false));
+                time = 0;
+
+                this.setPosition(new Vector2D(position.getX() + 65, position.getY()));
+            }/*
+            if (Keyboard.SHOOT && Keyboard.DASH) {
+            }*/
             getInput();
             move();
             handler.getGameCamera().centerOnPlayer(this);
@@ -186,8 +183,7 @@ public class Player extends Creature {
                         time = 0;
                     }
                 }
-                
-                
+
                 // Animación quieto
             }
             if (!Keyboard.LEFT && !Keyboard.RIGHT) {
@@ -241,8 +237,34 @@ public class Player extends Creature {
                     time = 0;
                 }
 
-            }        //g.fillRect((int)(position.getX()+bounds.x-handler.getGameCamera().getxOffset()),
-                    //(int)(position.getY()+bounds.y-handler.getGameCamera().getyOffset()),bounds.width,bounds.height); //dibujar rectangulo colisión
+            }
+            //dibujar rectangulo colisión
+            //g.fillRect((int)(position.getX()+bounds.x-handler.getGameCamera().getxOffset()),(int)(position.getY()+bounds.y-handler.getGameCamera().getyOffset()),bounds.width,bounds.height); 
+            if ((Keyboard.SHOOT && Keyboard.RIGHT) && !Keyboard.LEFT) {
+                if (time > 0 && time < 200) {
+                    g.drawImage(Assets.shootRight, (int) (position.getX() + handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else if (time >= 200 && time < 400) {
+                    g.drawImage(Assets.shootRight, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else if (time >= 400 && time < 600) {
+                    g.drawImage(Assets.shootRight, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else {
+                    g.drawImage(Assets.shootRight, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                    time = 0;
+
+                }
+
+            } else if ((Keyboard.SHOOT && Keyboard.LEFT) && !Keyboard.RIGHT) {
+                if (time > 0 && time < 200) {
+                    g.drawImage(Assets.shootLeft, (int) (position.getX() + handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else if (time >= 200 && time < 400) {
+                    g.drawImage(Assets.shootLeft, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else if (time >= 400 && time < 600) {
+                    g.drawImage(Assets.shootLeft, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                } else {
+                    g.drawImage(Assets.shootLeft, (int) (position.getX() - handler.getGameCamera().getxOffset()), (int) (position.getY() - handler.getGameCamera().getyOffset()), width, height, null);
+                    time = 0;
+                }
+            }
         }
     }
 

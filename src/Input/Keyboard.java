@@ -10,7 +10,7 @@ public class Keyboard implements KeyListener {
 
     private final boolean[] keys;
 
-    public static boolean UP, DOWN, LEFT, RIGHT, SHOOT,DASH,PAUSE;
+    public static boolean UP, DOWN, LEFT, RIGHT, SHOOT, DASH, PAUSE;
 
     public Keyboard() {
         keys = new boolean[256];
@@ -20,6 +20,7 @@ public class Keyboard implements KeyListener {
         RIGHT = false;
         DASH = false;
         PAUSE = false;
+        SHOOT = false;
     }
 
     public void update() {
